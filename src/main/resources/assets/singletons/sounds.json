@@ -1,0 +1,11 @@
+{
+  "siren": {
+    "category": "ambient",
+    "sounds": [
+      {
+        "name": "singletons:siren",
+        "stream": true
+      }
+    ]
+  }
+}

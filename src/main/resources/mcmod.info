@@ -1,0 +1,16 @@
+[
+{
+  "modid": "${modid}",
+  "name": "${modname}",
+  "description": "${modname} Gems",
+  "version": "${version}",
+  "mcversion": "${mcversion}",
+  "url": "",
+  "updateUrl": "",
+  "authorList": ["Puretie", "cyberpwn"],
+  "credits": "FML",
+  "logoFile": "",
+  "screenshots": [],
+  "dependencies": []
+}
+]
