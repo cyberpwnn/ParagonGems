@@ -1,0 +1,49 @@
+buildscript {
+    repositories {
+        jcenter()
+        maven { url = "https://files.minecraftforge.net/maven" }
+    }
+    dependencies {
+        classpath 'net.minecraftforge.gradle:ForgeGradle:2.3-SNAPSHOT'
+    }
+}
+apply plugin: 'net.minecraftforge.gradle.forge'
+apply plugin: "eclipse"
+
+def modid = "paragongems"
+def modname = "Paragon Gems"
+version = "1.0"
+group = "ninja.bytecode.paragongems"
+archivesBaseName = "ParagonGems"
+
+sourceCompatibility = targetCompatibility = '1.8'
+compileJava {
+    sourceCompatibility = targetCompatibility = '1.8'
+}
+
+minecraft {
+    version = "1.12.2-14.23.5.2838"
+    runDir = "run"
+    mappings = "snapshot_20171003"
+}
+
+dependencies {
+    
+}
+
+processResources {
+    inputs.property "version", project.version
+    inputs.property "mcversion", project.minecraft.version
+    inputs.property "modid", modid
+    inputs.property "modname", modname
+
+    from(sourceSets.main.resources.srcDirs) {
+        include 'mcmod.info'
+        
+        expand 'version':project.version, 'mcversion':project.minecraft.version, 'modid':modid, 'modname':modname
+    }
+        
+    from(sourceSets.main.resources.srcDirs) {
+        exclude 'mcmod.info'
+    }
+}
