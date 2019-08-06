@@ -1,5 +1,7 @@
 package ninja.bytecode.paragongems.util;
 
+import java.util.Random;
+
 import net.minecraft.item.Item;
 import net.minecraft.world.biome.Biome;
 import ninja.bytecode.paragongems.base.BlockGemOre;
@@ -52,4 +54,28 @@ public interface IGem
 	public float getMaximumRainfall();
 
 	public boolean canGenerate(Biome b);
+
+	public int getMinXP();
+
+	public int getMaxXP();
+
+	public void setXPDrop(int min, int max);
+
+	public float getResistance();
+
+	public float getHardness();
+
+	public void setHardness(float h);
+
+	public void setResistance(float r);
+
+	public int getHarvestLevel();
+
+	public void setHarvestLevel(int level);
+
+	public int dropXP(Random random);
+
+	public boolean hasOre();
+
+	public void setGenerateOre(boolean oregen);
 }

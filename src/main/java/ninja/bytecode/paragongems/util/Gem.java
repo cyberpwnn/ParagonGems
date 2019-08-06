@@ -1,5 +1,7 @@
 package ninja.bytecode.paragongems.util;
 
+import java.util.Random;
+
 import net.minecraft.item.Item;
 import net.minecraft.world.biome.Biome;
 import ninja.bytecode.paragongems.base.BlockGemOre;
@@ -16,6 +18,12 @@ public class Gem implements IGem
 	private float maxTemperature;
 	private float minRainfall;
 	private float maxRainfall;
+	private float hardness;
+	private float resistance;
+	private int minXp;
+	private int maxXp;
+	private int harvestLevel;
+	private boolean oregen;
 
 	public Gem(String id, String name)
 	{
@@ -23,6 +31,11 @@ public class Gem implements IGem
 		this.name = name;
 		setTemperatureRequirements(-1f, 2f);
 		setRainfallRequirements(0f, 1f);
+		setXPDrop(3, 7);
+		setHardness(3F);
+		setResistance(5F);
+		setHarvestLevel(2);
+		setGenerateOre(true);
 	}
 
 	@Override
@@ -118,5 +131,83 @@ public class Gem implements IGem
 	public boolean canGenerate(Biome b)
 	{
 		return b.getDefaultTemperature() > getMinimumTemperature() && b.getDefaultTemperature() < getMaximumTemperature() && b.getRainfall() > getMinimumRainfall() && b.getRainfall() < getMaximumRainfall();
+	}
+
+	@Override
+	public int getMinXP()
+	{
+		return minXp;
+	}
+
+	@Override
+	public int getMaxXP()
+	{
+		return maxXp;
+	}
+
+	@Override
+	public void setXPDrop(int min, int max)
+	{
+		this.maxXp = max;
+		this.minXp = min;
+	}
+
+	@Override
+	public int dropXP(Random random)
+	{
+		if(minXp < maxXp && maxXp > 0)
+		{
+			return random.nextInt((getMaxXP() - getMinXP()) + 1) + getMinXP();
+		}
+
+		return 0;
+	}
+
+	@Override
+	public float getResistance()
+	{
+		return resistance;
+	}
+
+	@Override
+	public float getHardness()
+	{
+		return hardness;
+	}
+
+	@Override
+	public void setHardness(float h)
+	{
+		this.hardness = h;
+	}
+
+	@Override
+	public void setResistance(float r)
+	{
+		this.resistance = r;
+	}
+
+	@Override
+	public int getHarvestLevel()
+	{
+		return harvestLevel;
+	}
+
+	@Override
+	public void setHarvestLevel(int level)
+	{
+		this.harvestLevel = level;
+	}
+
+	@Override
+	public boolean hasOre()
+	{
+		return oregen;
+	}
+
+	@Override
+	public void setGenerateOre(boolean oregen)
+	{
+		this.oregen = oregen;
 	}
 }
