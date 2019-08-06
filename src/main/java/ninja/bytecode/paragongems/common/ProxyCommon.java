@@ -2,7 +2,9 @@ package ninja.bytecode.paragongems.common;
 
 import java.util.List;
 
+import net.minecraft.block.Block;
 import net.minecraft.item.Item;
+import net.minecraft.item.ItemBlock;
 import net.minecraftforge.event.RegistryEvent;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.event.FMLInitializationEvent;
@@ -10,6 +12,7 @@ import net.minecraftforge.fml.common.event.FMLPostInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import ninja.bytecode.paragongems.ParagonGems;
+import ninja.bytecode.paragongems.base.BlockGemOre;
 import ninja.bytecode.paragongems.base.ItemGem;
 import ninja.bytecode.paragongems.base.ParagonCreativeTab;
 import ninja.bytecode.paragongems.util.BaseProxy;
@@ -28,6 +31,20 @@ public class ProxyCommon extends BaseProxy implements IProxy
 	public void onPreInit(FMLPreInitializationEvent e)
 	{
 		getLogger().info("Common Pre Init");
+		for(IGem i : getGems())
+		{
+			BlockGemOre bg = new BlockGemOre(i);
+			i.setGemOre(bg);
+			
+			ItemGem ig = new ItemGem(i);
+			ig.setCreativeTab(tab);
+			i.setGemItem(ig);
+			
+			ItemBlock ib = new ItemBlock(bg);
+			ib.setCreativeTab(tab);
+			ib.setRegistryName("block_" + i.getID() + "_ore_item");
+			i.setBlockItem(ib);
+		}
 	}
 
 	@SubscribeEvent
@@ -35,10 +52,17 @@ public class ProxyCommon extends BaseProxy implements IProxy
 	{
 		for(IGem i : getGems())
 		{
-			ItemGem ig = new ItemGem(i);
-			ig.setCreativeTab(tab);
-			i.setGemItem(ig);
-			e.getRegistry().register(ig);
+			e.getRegistry().register(i.getGemItem());
+			e.getRegistry().register(i.getBlockItem());
+		}
+	}
+	
+	@SubscribeEvent
+	public static void registerBlocks(RegistryEvent.Register<Block> e)
+	{
+		for(IGem i : getGems())
+		{
+			e.getRegistry().register(i.getGemOre());
 		}
 	}
 
