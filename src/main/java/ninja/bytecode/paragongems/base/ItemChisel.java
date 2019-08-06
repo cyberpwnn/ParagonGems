@@ -32,7 +32,7 @@ public class ItemChisel extends Item
 		setRegistryName(chisel.getID());
 		this.chisel = chisel;
 		setMaxStackSize(1);
-		setMaxDamage(6 - chisel.getFortuneLevel());
+		setMaxDamage(12 - chisel.getFortuneLevel() - (chisel.isMetal() ? 5 : 0));
 	}
 
 	@Override
