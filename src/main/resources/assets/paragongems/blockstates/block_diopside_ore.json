@@ -2,7 +2,7 @@
   "forge_marker": 1,
   "defaults": {
     "textures": {
-      "all": "paragongems:blocks/sapphire_ore"
+      "all": "paragongems:blocks/diopside_ore"
     },
     "model": "cube_all",
     "uvlock": true
