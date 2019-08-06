@@ -129,7 +129,7 @@ public class Utilities
 				}
 
 				pw.close();
-				System.out.print("Updated " + lang.getPath());
+				System.out.println("Updated " + lang.getPath());
 
 				// Item Models
 				File itemModels = new File(res, "assets/" + ParagonGems.MODID + "/models/item");
@@ -143,12 +143,13 @@ public class Utilities
 					{
 						File gemJSON = new File(itemModels, "item_" + i.getID() + ".json");
 						VIO.writeAll(gemJSON, text.replaceAll("\\Qgemx\\E", i.getID()));
+						System.out.println("Updated " + gemJSON.getPath());
 					}
 				}
 
 				else
 				{
-					System.out.print("Error, cant find demo item model");
+					System.out.println("Error, cant find demo item model");
 				}
 			}
 
