@@ -2,10 +2,10 @@ package ninja.bytecode.paragongems.gems;
 
 import ninja.bytecode.paragongems.util.Gem;
 
-public class GemEmerald extends Gem
+public class GemDiopside extends Gem
 {
-	public GemEmerald()
+	public GemDiopside()
 	{
-		super("emerald", "Emerald");
+		super("diopside", "Diopside");
 	}
 }
