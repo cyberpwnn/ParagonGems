@@ -35,6 +35,7 @@ public class ProxyCommon extends BaseProxy implements IProxy
 		{
 			BlockGemOre bg = new BlockGemOre(i);
 			i.setGemOre(bg);
+			bg.setCreativeTab(tab);
 			
 			ItemGem ig = new ItemGem(i);
 			ig.setCreativeTab(tab);

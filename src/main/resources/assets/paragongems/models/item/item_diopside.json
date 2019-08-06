@@ -1,7 +1,7 @@
 {
    "parent": "item/handheld",
    "textures": {
-       "layer0": "paragongems:items/emerald"
+       "layer0": "paragongems:items/diopside"
    }
 }
 
