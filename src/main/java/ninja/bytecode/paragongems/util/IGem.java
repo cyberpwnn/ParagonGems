@@ -1,5 +1,7 @@
 package ninja.bytecode.paragongems.util;
 
+import net.minecraft.item.ItemBlock;
+import ninja.bytecode.paragongems.base.BlockGemOre;
 import ninja.bytecode.paragongems.base.ItemGem;
 
 /**
@@ -26,5 +28,13 @@ public interface IGem
 	
 	public void setGemItem(ItemGem gem);
 	
+	public void setGemOre(BlockGemOre block);
+	
+	public BlockGemOre getGemOre(); 
+	
 	public ItemGem getGemItem();
+	
+	public void setBlockItem(ItemBlock ib);
+	
+	public ItemBlock getBlockItem();
 }
