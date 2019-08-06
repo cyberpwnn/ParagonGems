@@ -126,10 +126,74 @@ public class Utilities
 				for(IGem i : ProxyCommon.getGems())
 				{
 					pw.println("item.item_" + i.getID() + ".name=" + i.getName());
+					pw.println("tile.block_" + i.getID() + "_ore.name=" + i.getName() + " Ore");
 				}
 
 				pw.close();
 				System.out.println("Updated " + lang.getPath());
+
+				// Block States
+				File blockStateModels = new File(res, "assets/" + ParagonGems.MODID + "/blockstates");
+				File blockStateModelDemo = new File(blockStateModels, "block_gemx_ore.json");
+
+				if(blockStateModelDemo.exists())
+				{
+					String text = VIO.readAll(blockStateModelDemo);
+
+					for(IGem i : ProxyCommon.getGems())
+					{
+						File gemJSON = new File(blockStateModels, "block_" + i.getID() + "_ore.json");
+						VIO.writeAll(gemJSON, text.replaceAll("\\Qgemx\\E", i.getID()));
+						System.out.println("Updated " + gemJSON.getPath());
+					}
+				}
+
+				else
+				{
+					System.out.println("Error, cant find demo blockstate");
+				}
+
+				// Block Models
+				File blockModels = new File(res, "assets/" + ParagonGems.MODID + "/models/block");
+				File blockModelDemo = new File(blockModels, "block_gemx_ore.json");
+
+				if(blockModelDemo.exists())
+				{
+					String text = VIO.readAll(blockModelDemo);
+
+					for(IGem i : ProxyCommon.getGems())
+					{
+						File gemJSON = new File(blockModels, "block_" + i.getID() + "_ore.json");
+						VIO.writeAll(gemJSON, text.replaceAll("\\Qgemx\\E", i.getID()));
+						System.out.println("Updated " + gemJSON.getPath());
+					}
+				}
+
+				else
+				{
+					System.out.println("Error, cant find demo block model");
+				}
+
+				// Item Block Models
+				File itemBlockModels = new File(res, "assets/" + ParagonGems.MODID + "/models/item");
+				File itemBlockModelDemo = new File(itemBlockModels, "block_gemx_ore.json");
+
+				if(itemBlockModelDemo.exists())
+				{
+					String text = VIO.readAll(itemBlockModelDemo);
+
+					for(IGem i : ProxyCommon.getGems())
+					{
+						File gemJSON = new File(itemBlockModels, "block_" + i.getID() + "_ore.json");
+						VIO.writeAll(gemJSON, text.replaceAll("\\Qgemx\\E", i.getID()));
+						System.out.println("Updated " + gemJSON.getPath());
+					}
+				}
+
+				else
+				{
+					System.out.println("Error, cant find demo item block model");
+				}
 
 				// Item Models
 				File itemModels = new File(res, "assets/" + ParagonGems.MODID + "/models/item");
