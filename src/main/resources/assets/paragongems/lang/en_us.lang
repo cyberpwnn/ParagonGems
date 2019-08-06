@@ -1,4 +1,7 @@
 itemGroup.paragongems=Paragon Gems
 item.item_diopside.name=Diopside
+tile.block_diopside_ore.name=Diopside Ore
 item.item_ruby.name=Ruby
+tile.block_ruby_ore.name=Ruby Ore
 item.item_sapphire.name=Sapphire
+tile.block_sapphire_ore.name=Sapphire Ore
