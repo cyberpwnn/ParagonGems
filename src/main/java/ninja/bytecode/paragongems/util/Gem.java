@@ -1,6 +1,6 @@
 package ninja.bytecode.paragongems.util;
 
-import net.minecraft.item.ItemBlock;
+import net.minecraft.item.Item;
 import net.minecraft.world.biome.Biome;
 import ninja.bytecode.paragongems.base.BlockGemOre;
 import ninja.bytecode.paragongems.base.ItemGem;
@@ -11,7 +11,7 @@ public class Gem implements IGem
 	private final String name;
 	private ItemGem gem;
 	private BlockGemOre ore;
-	private ItemBlock ib;
+	private Item ib;
 	private float minTemperature;
 	private float maxTemperature;
 	private float minRainfall;
@@ -64,14 +64,14 @@ public class Gem implements IGem
 	}
 
 	@Override
-	public void setGemOreItem(ItemBlock ib)
+	public void setGemOreItem(Item ib)
 	{
 		this.ib = ib;
 
 	}
 
 	@Override
-	public ItemBlock getGemOreItem()
+	public Item getGemOreItem()
 	{
 		return ib;
 	}

@@ -1,6 +1,7 @@
 package ninja.bytecode.paragongems.client;
 
 import net.minecraft.client.renderer.block.model.ModelResourceLocation;
+import net.minecraft.item.Item;
 import net.minecraftforge.client.event.ModelRegistryEvent;
 import net.minecraftforge.client.model.ModelLoader;
 import net.minecraftforge.common.MinecraftForge;
@@ -50,9 +51,8 @@ public class ProxyClient extends ProxyCommon implements IProxy
 		for(IGem i : ProxyCommon.getGems())
 		{
 			ModelLoader.setCustomModelResourceLocation(i.getGemItem(), 0, new ModelResourceLocation(i.getGemItem().getRegistryName(), "inventory"));
-			ModelLoader.setCustomModelResourceLocation(i.getGemOreItem(), 0, new ModelResourceLocation(i.getGemItem().getRegistryName(), "inventory"));
-			
+			ModelLoader.setCustomModelResourceLocation(Item.getItemFromBlock(i.getGemOre()), 0, new ModelResourceLocation(Item.getItemFromBlock(i.getGemOre()).getRegistryName(), "inventory"));
 		}
 	}
-	
+
 }

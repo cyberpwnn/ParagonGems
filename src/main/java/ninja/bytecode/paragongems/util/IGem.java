@@ -1,6 +1,6 @@
 package ninja.bytecode.paragongems.util;
 
-import net.minecraft.item.ItemBlock;
+import net.minecraft.item.Item;
 import net.minecraft.world.biome.Biome;
 import ninja.bytecode.paragongems.base.BlockGemOre;
 import ninja.bytecode.paragongems.base.ItemGem;
@@ -35,9 +35,9 @@ public interface IGem
 
 	public ItemGem getGemItem();
 
-	public void setGemOreItem(ItemBlock ib);
+	public void setGemOreItem(Item ib);
 
-	public ItemBlock getGemOreItem();
+	public Item getGemOreItem();
 
 	public void setTemperatureRequirements(float min, float max);
 
