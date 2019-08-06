@@ -11,6 +11,7 @@ import net.minecraftforge.fml.common.event.FMLInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLPostInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
 import ninja.bytecode.paragongems.util.IProxy;
+import ninja.bytecode.paragongems.util.Utilities;
 
 @Mod.EventBusSubscriber(modid = ParagonGems.MODID)
 @Mod(modid = MODID, name = NAME, version = VERSION)
@@ -44,5 +45,10 @@ public class ParagonGems
 	public void postInit(FMLPostInitializationEvent event)
 	{
 		proxy.onPostEvent(event);
+	}
+
+	public static void main(String[] a)
+	{
+		Utilities.generateResources();
 	}
 }

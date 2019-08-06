@@ -9,7 +9,7 @@ public class ParagonCreativeTab extends CreativeTabs
 
 	public ParagonCreativeTab()
 	{
-		super("Paragon Gems");
+		super("paragongems");
 	}
 
 	@Override

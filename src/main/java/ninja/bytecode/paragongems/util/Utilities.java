@@ -1,11 +1,16 @@
 package ninja.bytecode.paragongems.util;
 
 import java.io.File;
+import java.io.FileOutputStream;
 import java.io.IOException;
+import java.io.PrintWriter;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.Enumeration;
 import java.util.List;
+
+import ninja.bytecode.paragongems.ParagonGems;
+import ninja.bytecode.paragongems.common.ProxyCommon;
 
 public class Utilities
 {
@@ -99,5 +104,42 @@ public class Utilities
 			}
 		}
 		return classes;
+	}
+
+	public static void generateResources()
+	{
+		File master = new File(System.getProperty("user.dir"));
+		System.out.println("Main Project Directory: " + master.getAbsolutePath());
+		File res = new File(master, "src/main/resources");
+
+		if(res.exists())
+		{
+			try
+			{
+				System.out.print("Generating Lamg...");
+				File lang = new File(res, "assets/" + ParagonGems.MODID + "/lang/en_us.lang");
+				lang.getParentFile().mkdirs();
+				PrintWriter pw = new PrintWriter(new FileOutputStream(lang));
+
+				pw.println("itemGroup.paragongems=Paragon Gems");
+
+				for(IGem i : ProxyCommon.getGems())
+				{
+					pw.println("item.item_" + i.getID() + ".name=" + i.getName());
+				}
+
+				pw.close();
+			}
+
+			catch(Throwable e)
+			{
+
+			}
+		}
+
+		else
+		{
+			System.out.print("Cannot find src/main/resources folder!");
+		}
 	}
 }

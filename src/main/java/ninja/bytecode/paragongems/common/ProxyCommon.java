@@ -54,7 +54,7 @@ public class ProxyCommon extends BaseProxy implements IProxy
 		getLogger().info("Common Post Init");
 	}
 
-	protected static List<Gem> getGems()
+	public static List<Gem> getGems()
 	{
 		return gems;
 	}
