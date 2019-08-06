@@ -14,10 +14,13 @@ import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import ninja.bytecode.paragongems.ParagonGems;
 import ninja.bytecode.paragongems.base.BlockGem;
 import ninja.bytecode.paragongems.base.BlockGemOre;
+import ninja.bytecode.paragongems.base.ItemChisel;
 import ninja.bytecode.paragongems.base.ItemGem;
 import ninja.bytecode.paragongems.base.ParagonCreativeTab;
 import ninja.bytecode.paragongems.util.BaseProxy;
+import ninja.bytecode.paragongems.util.Chisel;
 import ninja.bytecode.paragongems.util.Gem;
+import ninja.bytecode.paragongems.util.IChisel;
 import ninja.bytecode.paragongems.util.IGem;
 import ninja.bytecode.paragongems.util.IProxy;
 import ninja.bytecode.paragongems.util.Utilities;
@@ -25,13 +28,22 @@ import ninja.bytecode.paragongems.util.Utilities;
 @Mod.EventBusSubscriber(modid = ParagonGems.MODID)
 public class ProxyCommon extends BaseProxy implements IProxy
 {
-	private final static List<Gem> gems = Utilities.getInstances(Gem.class, ParagonGems.GEMS);
+	private final static List<IGem> gems = Utilities.getInstances(Gem.class, ParagonGems.GEMS);
+	private final static List<IChisel> chisels = Utilities.getInstances(Chisel.class, ParagonGems.CHISELS);
 	private final static ParagonCreativeTab tab = new ParagonCreativeTab();
 
 	@Override
 	public void onPreInit(FMLPreInitializationEvent e)
 	{
 		getLogger().info("Common Pre Init");
+		for(IChisel i : getChisels())
+		{
+			ItemChisel chisel = new ItemChisel(i);
+			chisel.setCreativeTab(tab);
+			i.setChiselItem(chisel);
+			i("Registering Chisel: " + i.getName());
+		}
+
 		for(IGem i : getGems())
 		{
 			ItemGem ig = new ItemGem(i);
@@ -66,6 +78,11 @@ public class ProxyCommon extends BaseProxy implements IProxy
 	@SubscribeEvent
 	public static void registerItems(RegistryEvent.Register<Item> e)
 	{
+		for(IChisel i : getChisels())
+		{
+			e.getRegistry().register(i.getChiselItem());
+		}
+
 		for(IGem i : getGems())
 		{
 			e.getRegistry().register(i.getGemItem());
@@ -111,7 +128,12 @@ public class ProxyCommon extends BaseProxy implements IProxy
 		getLogger().info("Common Post Init");
 	}
 
-	public static List<Gem> getGems()
+	public static List<IChisel> getChisels()
+	{
+		return chisels;
+	}
+
+	public static List<IGem> getGems()
 	{
 		return gems;
 	}

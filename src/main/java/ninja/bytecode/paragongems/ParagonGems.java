@@ -18,6 +18,7 @@ import ninja.bytecode.paragongems.util.Utilities;
 public class ParagonGems
 {
 	public static final String GEMS = "ninja.bytecode.paragongems.gems";
+	public static final String CHISELS = "ninja.bytecode.paragongems.chisels";
 	public static final String CLIENT = "ninja.bytecode.paragongems.client.ProxyClient";
 	public static final String SERVER = "ninja.bytecode.paragongems.server.ProxyServer";
 	public static final String MODID = "paragongems";

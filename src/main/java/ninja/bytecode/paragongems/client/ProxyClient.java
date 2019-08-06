@@ -14,6 +14,7 @@ import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 import ninja.bytecode.paragongems.ParagonGems;
 import ninja.bytecode.paragongems.common.ProxyCommon;
+import ninja.bytecode.paragongems.util.IChisel;
 import ninja.bytecode.paragongems.util.IGem;
 import ninja.bytecode.paragongems.util.IProxy;
 
@@ -48,20 +49,29 @@ public class ProxyClient extends ProxyCommon implements IProxy
 	@SubscribeEvent
 	public static void registerItemRenders(ModelRegistryEvent event)
 	{
+		for(IChisel i : ProxyCommon.getChisels())
+		{
+			registerRenderers(i.getChiselItem());
+		}
+
 		for(IGem i : ProxyCommon.getGems())
 		{
-			ModelLoader.setCustomModelResourceLocation(i.getGemItem(), 0, new ModelResourceLocation(i.getGemItem().getRegistryName(), "inventory"));
+			registerRenderers(i.getGemItem());
 
 			if(i.hasOre())
 			{
-				ModelLoader.setCustomModelResourceLocation(Item.getItemFromBlock(i.getGemOre()), 0, new ModelResourceLocation(Item.getItemFromBlock(i.getGemOre()).getRegistryName(), "inventory"));
+				registerRenderers(Item.getItemFromBlock(i.getGemOre()));
 			}
 
 			if(i.hasResourceBlock())
 			{
-				ModelLoader.setCustomModelResourceLocation(Item.getItemFromBlock(i.getGemBlock()), 0, new ModelResourceLocation(Item.getItemFromBlock(i.getGemBlock()).getRegistryName(), "inventory"));
+				registerRenderers(Item.getItemFromBlock(i.getGemBlock()));
 			}
 		}
 	}
 
+	public static void registerRenderers(Item item)
+	{
+		ModelLoader.setCustomModelResourceLocation(item, 0, new ModelResourceLocation(item.getRegistryName(), "inventory"));
+	}
 }

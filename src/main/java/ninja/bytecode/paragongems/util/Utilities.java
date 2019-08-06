@@ -123,6 +123,11 @@ public class Utilities
 
 				pw.println("itemGroup.paragongems=Paragon Gems");
 
+				for(IChisel i : ProxyCommon.getChisels())
+				{
+					pw.println("item." + i.getID() + ".name=" + i.getName());
+				}
+
 				for(IGem i : ProxyCommon.getGems())
 				{
 					pw.println("item.item_" + i.getID() + ".name=" + i.getName());
@@ -229,6 +234,22 @@ public class Utilities
 					}
 				}
 
+				// Item Models chisels
+				File itemModels2 = new File(res, "assets/" + ParagonGems.MODID + "/models/item");
+				File itemModelDemo2 = new File(itemModels2, "item_chix.json");
+
+				if(itemModelDemo2.exists())
+				{
+					String text = VIO.readAll(itemModelDemo2);
+
+					for(IChisel i : ProxyCommon.getChisels())
+					{
+						File gemJSON = new File(itemModels2, i.getID() + ".json");
+						VIO.writeAll(gemJSON, text.replaceAll("\\Qchix\\E", i.getID()));
+						System.out.println("Updated " + gemJSON.getPath());
+					}
+				}
+
 				// Item Models
 				File itemModels = new File(res, "assets/" + ParagonGems.MODID + "/models/item");
 				File itemModelDemo = new File(itemModels, "item_gemx.json");
@@ -248,7 +269,7 @@ public class Utilities
 
 			catch(Throwable e)
 			{
-
+				e.printStackTrace();
 			}
 		}
 

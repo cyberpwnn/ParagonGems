@@ -1,4 +1,6 @@
 itemGroup.paragongems=Paragon Gems
+item.chisel_iron.name=Iron Chisel
+item.chisel_stone.name=Stone Chisel
 item.item_amethyst.name=Amethyst
 tile.block_amethyst_ore.name=Amethyst Ore
 tile.block_amethyst.name=Amethyst Block
