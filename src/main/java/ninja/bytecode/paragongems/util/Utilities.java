@@ -127,12 +127,29 @@ public class Utilities
 				{
 					pw.println("item.item_" + i.getID() + ".name=" + i.getName());
 					pw.println("tile.block_" + i.getID() + "_ore.name=" + i.getName() + " Ore");
+					pw.println("tile.block_" + i.getID() + ".name=" + i.getName() + " Block");
 				}
 
 				pw.close();
 				System.out.println("Updated " + lang.getPath());
 
 				// Block States
+				File blockStateModels2 = new File(res, "assets/" + ParagonGems.MODID + "/blockstates");
+				File blockStateModelDemo2 = new File(blockStateModels2, "block_gemx.json");
+
+				if(blockStateModelDemo2.exists())
+				{
+					String text = VIO.readAll(blockStateModelDemo2);
+
+					for(IGem i : ProxyCommon.getGems())
+					{
+						File gemJSON = new File(blockStateModels2, "block_" + i.getID() + ".json");
+						VIO.writeAll(gemJSON, text.replaceAll("\\Qgemx\\E", i.getID()));
+						System.out.println("Updated " + gemJSON.getPath());
+					}
+				}
+
+				// Block States Ore
 				File blockStateModels = new File(res, "assets/" + ParagonGems.MODID + "/blockstates");
 				File blockStateModelDemo = new File(blockStateModels, "block_gemx_ore.json");
 
@@ -148,12 +165,23 @@ public class Utilities
 					}
 				}
 
-				else
+				// Block Models
+				File blockModels2 = new File(res, "assets/" + ParagonGems.MODID + "/models/block");
+				File blockModelDemo2 = new File(blockModels2, "block_gemx.json");
+
+				if(blockModelDemo2.exists())
 				{
-					System.out.println("Error, cant find demo blockstate");
+					String text = VIO.readAll(blockModelDemo2);
+
+					for(IGem i : ProxyCommon.getGems())
+					{
+						File gemJSON = new File(blockModels2, "block_" + i.getID() + ".json");
+						VIO.writeAll(gemJSON, text.replaceAll("\\Qgemx\\E", i.getID()));
+						System.out.println("Updated " + gemJSON.getPath());
+					}
 				}
 
-				// Block Models
+				// Block Models (Ore)
 				File blockModels = new File(res, "assets/" + ParagonGems.MODID + "/models/block");
 				File blockModelDemo = new File(blockModels, "block_gemx_ore.json");
 
@@ -169,12 +197,23 @@ public class Utilities
 					}
 				}
 
-				else
+				// Item Block Models
+				File itemBlockModels2 = new File(res, "assets/" + ParagonGems.MODID + "/models/item");
+				File itemBlockModelDemo2 = new File(itemBlockModels2, "block_gemx.json");
+
+				if(itemBlockModelDemo2.exists())
 				{
-					System.out.println("Error, cant find demo block model");
+					String text = VIO.readAll(itemBlockModelDemo2);
+
+					for(IGem i : ProxyCommon.getGems())
+					{
+						File gemJSON = new File(itemBlockModels2, "block_" + i.getID() + ".json");
+						VIO.writeAll(gemJSON, text.replaceAll("\\Qgemx\\E", i.getID()));
+						System.out.println("Updated " + gemJSON.getPath());
+					}
 				}
 
-				// Item Block Models
+				// Item Block Models (ore)
 				File itemBlockModels = new File(res, "assets/" + ParagonGems.MODID + "/models/item");
 				File itemBlockModelDemo = new File(itemBlockModels, "block_gemx_ore.json");
 
@@ -188,11 +227,6 @@ public class Utilities
 						VIO.writeAll(gemJSON, text.replaceAll("\\Qgemx\\E", i.getID()));
 						System.out.println("Updated " + gemJSON.getPath());
 					}
-				}
-
-				else
-				{
-					System.out.println("Error, cant find demo item block model");
 				}
 
 				// Item Models
@@ -209,11 +243,6 @@ public class Utilities
 						VIO.writeAll(gemJSON, text.replaceAll("\\Qgemx\\E", i.getID()));
 						System.out.println("Updated " + gemJSON.getPath());
 					}
-				}
-
-				else
-				{
-					System.out.println("Error, cant find demo item model");
 				}
 			}
 

@@ -12,6 +12,7 @@ import net.minecraftforge.fml.common.event.FMLPostInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import ninja.bytecode.paragongems.ParagonGems;
+import ninja.bytecode.paragongems.base.BlockGem;
 import ninja.bytecode.paragongems.base.BlockGemOre;
 import ninja.bytecode.paragongems.base.ItemGem;
 import ninja.bytecode.paragongems.base.ParagonCreativeTab;
@@ -33,17 +34,32 @@ public class ProxyCommon extends BaseProxy implements IProxy
 		getLogger().info("Common Pre Init");
 		for(IGem i : getGems())
 		{
-			BlockGemOre bg = new BlockGemOre(i);
-			i.setGemOre(bg);
-			bg.setCreativeTab(tab);
-
 			ItemGem ig = new ItemGem(i);
 			ig.setCreativeTab(tab);
 			i.setGemItem(ig);
+			i("Registering Gem: " + i.getName());
 
-			Item ib = new ItemBlock(bg);
-			ib.setRegistryName(bg.getRegistryName());
-			i.setGemOreItem(ib);
+			if(i.hasOre())
+			{
+				i("Registering Ore: " + i.getName());
+				BlockGemOre bg = new BlockGemOre(i);
+				Item ib = new ItemBlock(bg);
+				ib.setRegistryName(bg.getRegistryName());
+				bg.setCreativeTab(tab);
+				i.setGemOre(bg);
+				i.setGemOreItem(ib);
+			}
+
+			if(i.hasResourceBlock())
+			{
+				i("Registering Resource Block: " + i.getName());
+				BlockGem bg = new BlockGem(i);
+				Item ib = new ItemBlock(bg);
+				ib.setRegistryName(bg.getRegistryName());
+				bg.setCreativeTab(tab);
+				i.setGemBlock(bg);
+				i.setGemBlockItem(ib);
+			}
 		}
 	}
 
@@ -53,7 +69,16 @@ public class ProxyCommon extends BaseProxy implements IProxy
 		for(IGem i : getGems())
 		{
 			e.getRegistry().register(i.getGemItem());
-			e.getRegistry().register(i.getGemOreItem());
+
+			if(i.hasOre())
+			{
+				e.getRegistry().register(i.getGemOreItem());
+			}
+
+			if(i.hasResourceBlock())
+			{
+				e.getRegistry().register(i.getGemBlockItem());
+			}
 		}
 	}
 
@@ -62,7 +87,15 @@ public class ProxyCommon extends BaseProxy implements IProxy
 	{
 		for(IGem i : getGems())
 		{
-			e.getRegistry().register(i.getGemOre());
+			if(i.hasOre())
+			{
+				e.getRegistry().register(i.getGemOre());
+			}
+
+			if(i.hasResourceBlock())
+			{
+				e.getRegistry().register(i.getGemBlock());
+			}
 		}
 	}
 

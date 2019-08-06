@@ -4,6 +4,7 @@ import java.util.Random;
 
 import net.minecraft.item.Item;
 import net.minecraft.world.biome.Biome;
+import ninja.bytecode.paragongems.base.BlockGem;
 import ninja.bytecode.paragongems.base.BlockGemOre;
 import ninja.bytecode.paragongems.base.ItemGem;
 
@@ -13,7 +14,9 @@ public class Gem implements IGem
 	private final String name;
 	private ItemGem gem;
 	private BlockGemOre ore;
-	private Item ib;
+	private BlockGem block;
+	private Item itemBlockOre;
+	private Item itemBlock;
 	private float minTemperature;
 	private float maxTemperature;
 	private float minRainfall;
@@ -24,6 +27,7 @@ public class Gem implements IGem
 	private int maxXp;
 	private int harvestLevel;
 	private boolean oregen;
+	private boolean resourceblock;
 
 	public Gem(String id, String name)
 	{
@@ -36,6 +40,7 @@ public class Gem implements IGem
 		setResistance(5F);
 		setHarvestLevel(2);
 		setGenerateOre(true);
+		setUseResourceBlocks(true);
 	}
 
 	@Override
@@ -79,14 +84,14 @@ public class Gem implements IGem
 	@Override
 	public void setGemOreItem(Item ib)
 	{
-		this.ib = ib;
+		this.itemBlockOre = ib;
 
 	}
 
 	@Override
 	public Item getGemOreItem()
 	{
-		return ib;
+		return itemBlockOre;
 	}
 
 	@Override
@@ -209,5 +214,41 @@ public class Gem implements IGem
 	public void setGenerateOre(boolean oregen)
 	{
 		this.oregen = oregen;
+	}
+
+	@Override
+	public boolean hasResourceBlock()
+	{
+		return resourceblock;
+	}
+
+	@Override
+	public void setUseResourceBlocks(boolean rb)
+	{
+		this.resourceblock = rb;
+	}
+
+	@Override
+	public void setGemBlock(BlockGem block)
+	{
+		this.block = block;
+	}
+
+	@Override
+	public BlockGem getGemBlock()
+	{
+		return block;
+	}
+
+	@Override
+	public void setGemBlockItem(Item ib)
+	{
+		this.itemBlock = ib;
+	}
+
+	@Override
+	public Item getGemBlockItem()
+	{
+		return itemBlock;
 	}
 }

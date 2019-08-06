@@ -4,6 +4,7 @@ import java.util.Random;
 
 import net.minecraft.item.Item;
 import net.minecraft.world.biome.Biome;
+import ninja.bytecode.paragongems.base.BlockGem;
 import ninja.bytecode.paragongems.base.BlockGemOre;
 import ninja.bytecode.paragongems.base.ItemGem;
 
@@ -35,11 +36,19 @@ public interface IGem
 
 	public BlockGemOre getGemOre();
 
+	public void setGemBlock(BlockGem block);
+
+	public BlockGem getGemBlock();
+
 	public ItemGem getGemItem();
 
 	public void setGemOreItem(Item ib);
 
 	public Item getGemOreItem();
+
+	public void setGemBlockItem(Item ib);
+
+	public Item getGemBlockItem();
 
 	public void setTemperatureRequirements(float min, float max);
 
@@ -78,4 +87,8 @@ public interface IGem
 	public boolean hasOre();
 
 	public void setGenerateOre(boolean oregen);
+
+	public boolean hasResourceBlock();
+
+	public void setUseResourceBlocks(boolean rb);
 }
