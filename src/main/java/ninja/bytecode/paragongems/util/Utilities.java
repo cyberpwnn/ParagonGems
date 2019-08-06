@@ -116,7 +116,7 @@ public class Utilities
 		{
 			try
 			{
-				System.out.print("Generating Lamg...");
+				System.out.print("=== Lang ===");
 				File lang = new File(res, "assets/" + ParagonGems.MODID + "/lang/en_us.lang");
 				lang.getParentFile().mkdirs();
 				PrintWriter pw = new PrintWriter(new FileOutputStream(lang));
