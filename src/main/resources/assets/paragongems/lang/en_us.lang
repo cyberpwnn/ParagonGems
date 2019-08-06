@@ -1,9 +1,13 @@
 itemGroup.paragongems=Paragon Gems
 item.item_amethyst.name=Amethyst
 tile.block_amethyst_ore.name=Amethyst Ore
+tile.block_amethyst.name=Amethyst Block
 item.item_diopside.name=Diopside
 tile.block_diopside_ore.name=Diopside Ore
+tile.block_diopside.name=Diopside Block
 item.item_ruby.name=Ruby
 tile.block_ruby_ore.name=Ruby Ore
+tile.block_ruby.name=Ruby Block
 item.item_sapphire.name=Sapphire
 tile.block_sapphire_ore.name=Sapphire Ore
+tile.block_sapphire.name=Sapphire Block
