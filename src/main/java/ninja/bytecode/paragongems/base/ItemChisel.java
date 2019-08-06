@@ -8,6 +8,7 @@ import net.minecraft.block.state.IBlockState;
 import net.minecraft.client.Minecraft;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.item.EntityItem;
+import net.minecraft.entity.item.EntityXPOrb;
 import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.init.Blocks;
 import net.minecraft.item.Item;
@@ -63,16 +64,24 @@ public class ItemChisel extends Item
 
 					if(stack.getItemDamage() == stack.getMaxDamage() - 1)
 					{
+						int xp = hit.getExpDrop(state, world, rt.getBlockPos(), chisel.getFortuneLevel());
 						stack.setItemDamage(0);
 						Vec3d vp = player.getPositionEyes(Minecraft.getMinecraft().getRenderPartialTicks());
 						Vec3d vb = new Vec3d(rt.getBlockPos().getX(), rt.getBlockPos().getY(), rt.getBlockPos().getZ());
 						Vec3d vs = vb.subtract(vp).normalize();
 						world.setBlockState(rt.getBlockPos(), Blocks.STONE.getDefaultState());
-						EntityItem item = new EntityItem(player.getEntityWorld(), rt.getBlockPos().getX() - vs.x, rt.getBlockPos().getY() - vs.y, rt.getBlockPos().getZ() - vs.z, new ItemStack(dropped, count));
-						player.getEntityWorld().spawnEntity(item);
+						ItemStack is = new ItemStack(dropped, count);
+						is.setItemDamage(hit.damageDropped(state));
+						EntityItem item = new EntityItem(player.getEntityWorld(), rt.getBlockPos().getX() - vs.x, rt.getBlockPos().getY() - vs.y, rt.getBlockPos().getZ() - vs.z, is);
 						world.playSound(null, rt.getBlockPos().getX(), rt.getBlockPos().getY(), rt.getBlockPos().getZ(), chisel.isMetal() ? ProxyCommon.getTingSound() : ProxyCommon.getHitSound(), SoundCategory.BLOCKS, 1f, (random.nextFloat() / 4f) + 0.9f);
 						world.playSound(null, rt.getBlockPos().getX(), rt.getBlockPos().getY(), rt.getBlockPos().getZ(), ProxyCommon.getBreakSound(), SoundCategory.BLOCKS, 1f, (random.nextFloat() / 4f) + 0.9f);
 						world.playSound(null, rt.getBlockPos().getX(), rt.getBlockPos().getY(), rt.getBlockPos().getZ(), ProxyCommon.getGemSound(), SoundCategory.BLOCKS, 1f, (random.nextFloat() / 4f) + 0.9f);
+						player.getEntityWorld().spawnEntity(item);
+
+						if(xp > 0)
+						{
+							player.getEntityWorld().spawnEntity(new EntityXPOrb(player.getEntityWorld(), rt.getBlockPos().getX() - vs.x, rt.getBlockPos().getY() - vs.y, rt.getBlockPos().getZ() - vs.z, xp));
+						}
 					}
 
 					else
