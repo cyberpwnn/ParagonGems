@@ -57,14 +57,14 @@ public class Gem implements IGem
 	}
 
 	@Override
-	public void setBlockItem(ItemBlock ib)
+	public void setGemOreItem(ItemBlock ib)
 	{
 		this.ib = ib;
 		
 	}
 
 	@Override
-	public ItemBlock getBlockItem()
+	public ItemBlock getGemOreItem()
 	{
 		return ib;
 	}

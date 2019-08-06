@@ -58,7 +58,7 @@ public class ProxyClient extends ProxyCommon implements IProxy
 	{
 		for(IGem i : ProxyCommon.getGems())
 		{
-			ModelLoader.setCustomModelResourceLocation(i.getBlockItem(), 0, new ModelResourceLocation(i.getGemItem().getRegistryName(), "inventory"));
+			ModelLoader.setCustomModelResourceLocation(i.getGemOreItem(), 0, new ModelResourceLocation(i.getGemItem().getRegistryName(), "inventory"));
 		}
 	}
 	

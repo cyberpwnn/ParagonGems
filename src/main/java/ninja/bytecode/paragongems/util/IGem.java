@@ -34,7 +34,7 @@ public interface IGem
 	
 	public ItemGem getGemItem();
 	
-	public void setBlockItem(ItemBlock ib);
+	public void setGemOreItem(ItemBlock ib);
 	
-	public ItemBlock getBlockItem();
+	public ItemBlock getGemOreItem();
 }

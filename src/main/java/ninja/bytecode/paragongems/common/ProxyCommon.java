@@ -43,7 +43,7 @@ public class ProxyCommon extends BaseProxy implements IProxy
 			ItemBlock ib = new ItemBlock(bg);
 			ib.setCreativeTab(tab);
 			ib.setRegistryName("block_" + i.getID() + "_ore_item");
-			i.setBlockItem(ib);
+			i.setGemOreItem(ib);
 		}
 	}
 
@@ -53,7 +53,7 @@ public class ProxyCommon extends BaseProxy implements IProxy
 		for(IGem i : getGems())
 		{
 			e.getRegistry().register(i.getGemItem());
-			e.getRegistry().register(i.getBlockItem());
+			e.getRegistry().register(i.getGemOreItem());
 		}
 	}
 	
