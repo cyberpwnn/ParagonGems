@@ -50,15 +50,8 @@ public class ProxyClient extends ProxyCommon implements IProxy
 		for(IGem i : ProxyCommon.getGems())
 		{
 			ModelLoader.setCustomModelResourceLocation(i.getGemItem(), 0, new ModelResourceLocation(i.getGemItem().getRegistryName(), "inventory"));
-		}
-	}
-	
-	@SubscribeEvent
-	public static void registerBlockRenders(ModelRegistryEvent event)
-	{
-		for(IGem i : ProxyCommon.getGems())
-		{
 			ModelLoader.setCustomModelResourceLocation(i.getGemOreItem(), 0, new ModelResourceLocation(i.getGemItem().getRegistryName(), "inventory"));
+			
 		}
 	}
 	
