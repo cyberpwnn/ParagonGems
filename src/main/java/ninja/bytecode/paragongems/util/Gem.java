@@ -1,9 +1,12 @@
 package ninja.bytecode.paragongems.util;
 
+import ninja.bytecode.paragongems.base.ItemGem;
+
 public class Gem implements IGem
 {
 	private final String id;
 	private final String name;
+	private ItemGem gem;
 
 	public Gem(String id, String name)
 	{
@@ -21,5 +24,18 @@ public class Gem implements IGem
 	public String getName()
 	{
 		return name;
+	}
+
+	@Override
+	public void setGemItem(ItemGem gem)
+	{
+		this.gem = gem;
+
+	}
+
+	@Override
+	public ItemGem getGemItem()
+	{
+		return gem;
 	}
 }

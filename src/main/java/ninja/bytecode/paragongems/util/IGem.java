@@ -1,5 +1,7 @@
 package ninja.bytecode.paragongems.util;
 
+import ninja.bytecode.paragongems.base.ItemGem;
+
 /**
  * Represents a gem which can be used to register items and blocks for each gem
  * type
@@ -21,4 +23,8 @@ public interface IGem
 	 * @return the gem type name
 	 */
 	public String getName();
+	
+	public void setGemItem(ItemGem gem);
+	
+	public ItemGem getGemItem();
 }
