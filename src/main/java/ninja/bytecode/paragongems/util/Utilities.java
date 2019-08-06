@@ -116,7 +116,7 @@ public class Utilities
 		{
 			try
 			{
-				System.out.print("=== Lang ===");
+				// Lang
 				File lang = new File(res, "assets/" + ParagonGems.MODID + "/lang/en_us.lang");
 				lang.getParentFile().mkdirs();
 				PrintWriter pw = new PrintWriter(new FileOutputStream(lang));
@@ -129,6 +129,27 @@ public class Utilities
 				}
 
 				pw.close();
+				System.out.print("Updated " + lang.getPath());
+
+				// Item Models
+				File itemModels = new File(res, "assets/" + ParagonGems.MODID + "/models/item");
+				File itemModelDemo = new File(itemModels, "item_gemx.json");
+
+				if(itemModelDemo.exists())
+				{
+					String text = VIO.readAll(itemModelDemo);
+
+					for(IGem i : ProxyCommon.getGems())
+					{
+						File gemJSON = new File(itemModels, "item_" + i.getID() + ".json");
+						VIO.writeAll(gemJSON, text.replaceAll("\\Qgemx\\E", i.getID()));
+					}
+				}
+
+				else
+				{
+					System.out.print("Error, cant find demo item model");
+				}
 			}
 
 			catch(Throwable e)
