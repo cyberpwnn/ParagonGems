@@ -1,10 +1,14 @@
 package ninja.bytecode.paragongems.common;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import net.minecraft.block.Block;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemBlock;
+import net.minecraft.util.ResourceLocation;
+import net.minecraft.util.SoundEvent;
 import net.minecraftforge.event.RegistryEvent;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.event.FMLInitializationEvent;
@@ -28,6 +32,7 @@ import ninja.bytecode.paragongems.util.Utilities;
 @Mod.EventBusSubscriber(modid = ParagonGems.MODID)
 public class ProxyCommon extends BaseProxy implements IProxy
 {
+	private final static Map<String, SoundEvent> sounds = new HashMap<>();
 	private final static List<IGem> gems = Utilities.getInstances(Gem.class, ParagonGems.GEMS);
 	private final static List<IChisel> chisels = Utilities.getInstances(Chisel.class, ParagonGems.CHISELS);
 	private final static ParagonCreativeTab tab = new ParagonCreativeTab();
@@ -76,6 +81,12 @@ public class ProxyCommon extends BaseProxy implements IProxy
 	}
 
 	@SubscribeEvent
+	public static void registerSounds(RegistryEvent.Register<SoundEvent> e)
+	{
+		register(e, "hit", "ting", "break", "gems");
+	}
+
+	@SubscribeEvent
 	public static void registerItems(RegistryEvent.Register<Item> e)
 	{
 		for(IChisel i : getChisels())
@@ -116,6 +127,26 @@ public class ProxyCommon extends BaseProxy implements IProxy
 		}
 	}
 
+	public static SoundEvent getHitSound()
+	{
+		return sounds.get("hit");
+	}
+
+	public static SoundEvent getTingSound()
+	{
+		return sounds.get("ting");
+	}
+
+	public static SoundEvent getBreakSound()
+	{
+		return sounds.get("break");
+	}
+
+	public static SoundEvent getGemSound()
+	{
+		return sounds.get("gems");
+	}
+
 	@Override
 	public void onInit(FMLInitializationEvent e)
 	{
@@ -126,6 +157,16 @@ public class ProxyCommon extends BaseProxy implements IProxy
 	public void onPostEvent(FMLPostInitializationEvent e)
 	{
 		getLogger().info("Common Post Init");
+	}
+
+	private static void register(RegistryEvent.Register<SoundEvent> e, String... fs)
+	{
+		for(String res : fs)
+		{
+			sounds.put(res, new SoundEvent(new ResourceLocation(ParagonGems.MODID, res)));
+			sounds.get(res).setRegistryName(res);
+			e.getRegistry().register(sounds.get(res));
+		}
 	}
 
 	public static List<IChisel> getChisels()

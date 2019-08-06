@@ -1,0 +1,22 @@
+{
+    "hit": {
+        "category": "block",
+        "subtitle": "Chiseling Ore",
+        "sounds": [ "paragongems:hit1","paragongems:hit2","paragongems:hit3","paragongems:hit4" ]
+    },
+    "ting": {
+        "category": "block",
+        "subtitle": "Chiseling Ore",
+        "sounds": [ "paragongems:ting1","paragongems:ting2","paragongems:ting3","paragongems:ting4","paragongems:ting5" ]
+    },
+    "break": {
+        "category": "block",
+        "subtitle": "Breaking Ore",
+        "sounds": [ "paragongems:break1","paragongems:break2" ]
+    },
+    "gems": {
+        "category": "block",
+        "subtitle": "Gems Mined",
+        "sounds": [ "paragongems:gems" ]
+    }
+}

@@ -7,5 +7,7 @@ public class ChiselIron extends Chisel
 	public ChiselIron()
 	{
 		super("chisel_iron", "Iron Chisel");
+		setFortuneLevel(2);
+		setMetal(true);
 	}
 }

@@ -8,7 +8,15 @@ public interface IChisel
 
 	public String getName();
 
+	public void setFortuneLevel(int level);
+
+	public int getFortuneLevel();
+
 	public void setChiselItem(ItemChisel chisel);
 
 	public ItemChisel getChiselItem();
+
+	public boolean isMetal();
+
+	public void setMetal(boolean metal);
 }
