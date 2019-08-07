@@ -16,6 +16,7 @@ import net.minecraftforge.fml.common.event.FMLInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLPostInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
+import net.minecraftforge.fml.common.registry.GameRegistry;
 import ninja.bytecode.paragongems.ParagonGems;
 import ninja.bytecode.paragongems.base.BlockGem;
 import ninja.bytecode.paragongems.base.BlockGemOre;
@@ -168,6 +169,7 @@ public class ProxyCommon extends BaseProxy implements IProxy
 	public void onInit(FMLInitializationEvent e)
 	{
 		getLogger().info("Common Init");
+		GameRegistry.registerWorldGenerator(new ParagonGemOreGenerator(), 0);
 	}
 
 	@Override

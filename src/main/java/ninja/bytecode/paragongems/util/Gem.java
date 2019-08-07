@@ -1,15 +1,22 @@
 package ninja.bytecode.paragongems.util;
 
 import java.util.Random;
+import java.util.UUID;
 
 import net.minecraft.block.Block;
+import net.minecraft.init.Blocks;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemBlock;
+import net.minecraft.util.math.BlockPos;
+import net.minecraft.world.World;
 import net.minecraft.world.biome.Biome;
+import net.minecraft.world.chunk.IChunkProvider;
+import net.minecraft.world.gen.IChunkGenerator;
 import ninja.bytecode.paragongems.base.BlockGem;
 import ninja.bytecode.paragongems.base.BlockGemOre;
 import ninja.bytecode.paragongems.base.ItemGem;
 import ninja.bytecode.paragongems.base.ItemGemRock;
+import ninja.bytecode.paragongems.common.ParagonGemOreGenerator;
 import ninja.bytecode.paragongems.common.ProxyCommon;
 
 public class Gem implements IGem
@@ -28,12 +35,16 @@ public class Gem implements IGem
 	private float maxRainfall;
 	private float hardness;
 	private float resistance;
+	private int oregenDimension;
 	private int minXp;
 	private int maxXp;
+	private int minHeight;
+	private int maxHeight;
 	private int harvestLevel;
 	private boolean oregen;
 	private boolean rocks;
 	private boolean resourceblock;
+	private long hash;
 
 	public Gem(String id, String name)
 	{
@@ -48,6 +59,10 @@ public class Gem implements IGem
 		setGenerateOre(true);
 		setUseResourceBlocks(true);
 		setUseRocks(true);
+		setOregenDimension(0);
+		setOreHeightRange(1, 254);
+		hash = UUID.nameUUIDFromBytes((getID() + "-o-" + getName()).getBytes()).getMostSignificantBits() + 10000 * Short.MAX_VALUE;
+		System.out.println(getName() + " Gem's Hash = " + hash);
 	}
 
 	@Override
@@ -344,12 +359,81 @@ public class Gem implements IGem
 	{
 		for(IGem i : ProxyCommon.getGems())
 		{
-			if(i.equals(gem.getClass()))
+			if(i.getClass().equals(gem))
 			{
 				return (T) i;
 			}
 		}
 
 		return null;
+	}
+
+	@Override
+	public int getOregenDimension()
+	{
+		return oregenDimension;
+	}
+
+	@Override
+	public void setOregenDimension(int dim)
+	{
+		this.oregenDimension = dim;
+	}
+
+	@Override
+	public int getOreMinimumHeight()
+	{
+		return minHeight;
+	}
+
+	@Override
+	public int getOreMaximumHeight()
+	{
+		return maxHeight;
+	}
+
+	@Override
+	public void setOreHeightRange(int min, int max)
+	{
+		this.maxHeight = max;
+		this.minHeight = min;
+	}
+
+	@Override
+	public void generate(Random random, int chunkX, int chunkZ, World world, IChunkGenerator chunkGenerator, IChunkProvider chunkProvider)
+	{
+		int dim = world.provider.getDimension();
+
+		if((dim > 1 || dim < -1 && oregenDimension == 0) || dim == oregenDimension)
+		{
+			Block replacer = oregenDimension == 0 ? Blocks.STONE : oregenDimension == -1 ? Blocks.NETHERRACK : oregenDimension == 1 ? Blocks.END_STONE : Blocks.STONE;
+			SimplexNoiseGenerator superHeight = new SimplexNoiseGenerator(hash - world.getSeed());
+			SimplexNoiseGenerator subHeight = new SimplexNoiseGenerator(hash + world.getSeed());
+			SimplexNoiseGenerator gate = new SimplexNoiseGenerator(hash - world.getSeed());
+
+			for(int ii = 0; ii < 16; ii++)
+			{
+				for(int jj = 0; jj < 16; jj++)
+				{
+					int i = (chunkX << 4) + ii + 1;
+					int j = (chunkZ << 4) + jj + 1;
+
+					if(gate.noise(i / 8D, j / 8D) < 0.73)
+					{
+						continue;
+					}
+
+					double r = getOreMaximumHeight() - getOreMinimumHeight();
+					double a = getOreMinimumHeight() + (((superHeight.noise(i / 641D, j / 641D) / 2D) + 0.5D) * r);
+					double b = 4.155D * ((subHeight.noise(j / 8.534D, i / 8.534D) / 2D) + 0.5D);
+					BlockPos p = new BlockPos(i, (int) Math.round((a - 4.155D) + b), j);
+
+					if(ParagonGemOreGenerator.DEBUG_GENERATOR_NO_STONE || world.getBlockState(p).getBlock().equals(replacer))
+					{
+						world.setBlockState(p, getGemOre().getDefaultState());
+					}
+				}
+			}
+		}
 	}
 }

@@ -3,7 +3,10 @@ package ninja.bytecode.paragongems.util;
 import java.util.Random;
 
 import net.minecraft.item.Item;
+import net.minecraft.world.World;
 import net.minecraft.world.biome.Biome;
+import net.minecraft.world.chunk.IChunkProvider;
+import net.minecraft.world.gen.IChunkGenerator;
 import ninja.bytecode.paragongems.base.BlockGem;
 import ninja.bytecode.paragongems.base.BlockGemOre;
 import ninja.bytecode.paragongems.base.ItemGem;
@@ -100,4 +103,16 @@ public interface IGem
 	public boolean hasRocks();
 
 	public void setUseRocks(boolean rb);
+
+	public int getOregenDimension();
+
+	public void setOregenDimension(int dim);
+
+	public int getOreMinimumHeight();
+
+	public int getOreMaximumHeight();
+
+	public void setOreHeightRange(int min, int max);
+
+	public void generate(Random random, int chunkX, int chunkZ, World world, IChunkGenerator chunkGenerator, IChunkProvider chunkProvider);
 }

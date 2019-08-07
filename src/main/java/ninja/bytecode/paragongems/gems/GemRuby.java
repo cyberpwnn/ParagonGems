@@ -7,7 +7,8 @@ public class GemRuby extends Gem
 	public GemRuby()
 	{
 		super("ruby", "Ruby");
-		setRainfallRequirements(0f, 0.1f);
-		setTemperatureRequirements(0.65f, 2f);
+		setTemperatureRequirements(0.7f, 1.4f);
+		setRainfallRequirements(0.2f, 0.8f);
+		setOreHeightRange(1, 17);
 	}
 }
