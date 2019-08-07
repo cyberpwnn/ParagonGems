@@ -97,7 +97,7 @@ public interface IGem
 
 	public void setUseResourceBlocks(boolean rb);
 
-	public boolean hasShards();
+	public boolean hasShard();
 
 	public void setUseShards(boolean rb);
 

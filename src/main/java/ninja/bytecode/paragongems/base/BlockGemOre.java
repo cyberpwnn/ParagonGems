@@ -53,4 +53,9 @@ public class BlockGemOre extends BlockOre
 
 		return 0;
 	}
+
+	public IGem getGem()
+	{
+		return gem;
+	}
 }

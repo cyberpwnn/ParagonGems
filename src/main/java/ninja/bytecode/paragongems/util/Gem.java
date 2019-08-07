@@ -2,12 +2,15 @@ package ninja.bytecode.paragongems.util;
 
 import java.util.Random;
 
+import net.minecraft.block.Block;
 import net.minecraft.item.Item;
+import net.minecraft.item.ItemBlock;
 import net.minecraft.world.biome.Biome;
 import ninja.bytecode.paragongems.base.BlockGem;
 import ninja.bytecode.paragongems.base.BlockGemOre;
 import ninja.bytecode.paragongems.base.ItemGem;
 import ninja.bytecode.paragongems.base.ItemGemShard;
+import ninja.bytecode.paragongems.common.ProxyCommon;
 
 public class Gem implements IGem
 {
@@ -271,7 +274,7 @@ public class Gem implements IGem
 	}
 
 	@Override
-	public boolean hasShards()
+	public boolean hasShard()
 	{
 		return shards;
 	}
@@ -292,5 +295,76 @@ public class Gem implements IGem
 	public void setShardCount(int rb)
 	{
 		this.shardCount = rb;
+	}
+
+	public static IGem getGem(Block item)
+	{
+		if(item instanceof BlockGemOre)
+		{
+			((BlockGemOre) item).getGem();
+		}
+
+		else if(item instanceof BlockGem)
+		{
+			((BlockGem) item).getGem();
+		}
+
+		return null;
+	}
+
+	public static IGem getGem(Item item)
+	{
+		if(item instanceof ItemGem)
+		{
+			((ItemGem) item).getGem();
+		}
+
+		else if(item instanceof ItemGemShard)
+		{
+			((ItemGemShard) item).getGem();
+		}
+
+		else if(item instanceof ItemBlock && ((ItemBlock) item).getBlock() instanceof BlockGemOre)
+		{
+			((BlockGemOre) ((ItemBlock) item).getBlock()).getGem();
+		}
+
+		else if(item instanceof ItemBlock && ((ItemBlock) item).getBlock() instanceof BlockGem)
+		{
+			((BlockGem) ((ItemBlock) item).getBlock()).getGem();
+		}
+
+		return null;
+	}
+
+	public static IGem getRandomGem()
+	{
+		return ProxyCommon.getGems().get(ProxyCommon.random.nextInt(ProxyCommon.getGems().size()));
+	}
+
+	public static IGem getGem(String id)
+	{
+		for(IGem i : ProxyCommon.getGems())
+		{
+			if(i.getID().equals(id))
+			{
+				return i;
+			}
+		}
+
+		return null;
+	}
+
+	public static <T extends IGem> T getGem(Class<T> gem)
+	{
+		for(IGem i : ProxyCommon.getGems())
+		{
+			if(i.equals(gem.getClass()))
+			{
+				return (T) i;
+			}
+		}
+
+		return null;
 	}
 }

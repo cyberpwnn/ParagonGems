@@ -20,4 +20,9 @@ public class BlockGem extends Block
 		setHarvestLevel("pickaxe", gem.getHarvestLevel());
 		setSoundType(SoundType.METAL);
 	}
+
+	public IGem getGem()
+	{
+		return gem;
+	}
 }

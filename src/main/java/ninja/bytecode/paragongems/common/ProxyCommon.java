@@ -1,5 +1,6 @@
 package ninja.bytecode.paragongems.common;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -20,7 +21,9 @@ import ninja.bytecode.paragongems.base.BlockGem;
 import ninja.bytecode.paragongems.base.BlockGemOre;
 import ninja.bytecode.paragongems.base.ItemChisel;
 import ninja.bytecode.paragongems.base.ItemGem;
+import ninja.bytecode.paragongems.base.ItemGemShard;
 import ninja.bytecode.paragongems.base.ParagonCreativeTab;
+import ninja.bytecode.paragongems.gems.GemSapphire;
 import ninja.bytecode.paragongems.util.BaseProxy;
 import ninja.bytecode.paragongems.util.Chisel;
 import ninja.bytecode.paragongems.util.Gem;
@@ -28,23 +31,26 @@ import ninja.bytecode.paragongems.util.IChisel;
 import ninja.bytecode.paragongems.util.IGem;
 import ninja.bytecode.paragongems.util.IProxy;
 import ninja.bytecode.paragongems.util.Utilities;
+import scala.util.Random;
 
 @Mod.EventBusSubscriber(modid = ParagonGems.MODID)
 public class ProxyCommon extends BaseProxy implements IProxy
 {
+	public static final Random random = new Random();
 	private final static Map<String, SoundEvent> sounds = new HashMap<>();
 	private final static List<IGem> gems = Utilities.getInstances(Gem.class, ParagonGems.GEMS);
 	private final static List<IChisel> chisels = Utilities.getInstances(Chisel.class, ParagonGems.CHISELS);
-	private final static ParagonCreativeTab tab = new ParagonCreativeTab();
+	private static ParagonCreativeTab tab;
 
 	@Override
 	public void onPreInit(FMLPreInitializationEvent e)
 	{
+		List<Runnable> tabber = new ArrayList<Runnable>();
 		getLogger().info("Common Pre Init");
 		for(IChisel i : getChisels())
 		{
 			ItemChisel chisel = new ItemChisel(i);
-			chisel.setCreativeTab(tab);
+			tabber.add(() -> chisel.setCreativeTab(tab));
 			i.setChiselItem(chisel);
 			i("Registering Chisel: " + i.getName());
 		}
@@ -52,9 +58,17 @@ public class ProxyCommon extends BaseProxy implements IProxy
 		for(IGem i : getGems())
 		{
 			ItemGem ig = new ItemGem(i);
-			ig.setCreativeTab(tab);
+			tabber.add(() -> ig.setCreativeTab(tab));
 			i.setGemItem(ig);
 			i("Registering Gem: " + i.getName());
+
+			if(i.hasShard())
+			{
+				ItemGemShard is = new ItemGemShard(i);
+				tabber.add(() -> is.setCreativeTab(tab));
+				i.setGemShardItem(is);
+				i("Registering Shard: " + i.getName());
+			}
 
 			if(i.hasOre())
 			{
@@ -62,7 +76,7 @@ public class ProxyCommon extends BaseProxy implements IProxy
 				BlockGemOre bg = new BlockGemOre(i);
 				Item ib = new ItemBlock(bg);
 				ib.setRegistryName(bg.getRegistryName());
-				bg.setCreativeTab(tab);
+				tabber.add(() -> bg.setCreativeTab(tab));
 				i.setGemOre(bg);
 				i.setGemOreItem(ib);
 			}
@@ -73,11 +87,14 @@ public class ProxyCommon extends BaseProxy implements IProxy
 				BlockGem bg = new BlockGem(i);
 				Item ib = new ItemBlock(bg);
 				ib.setRegistryName(bg.getRegistryName());
-				bg.setCreativeTab(tab);
+				tabber.add(() -> bg.setCreativeTab(tab));
 				i.setGemBlock(bg);
 				i.setGemBlockItem(ib);
 			}
 		}
+
+		tab = new ParagonCreativeTab(new GemSapphire());
+		tabber.forEach((r) -> r.run());
 	}
 
 	@SubscribeEvent
