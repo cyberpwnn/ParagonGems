@@ -151,8 +151,6 @@ public class ProxyCommon extends BaseProxy implements IProxy
 			rarity += 1D - ((double) (System.currentTimeMillis() - lastGeneratedFromLava) / timeRange);
 		}
 
-		System.out.println(rarity);
-
 		BlockPos pos = e.getPos();
 		World w = e.getWorld();
 		Block type = e.getState().getBlock();

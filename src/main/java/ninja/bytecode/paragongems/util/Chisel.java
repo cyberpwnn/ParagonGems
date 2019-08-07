@@ -8,6 +8,7 @@ public class Chisel implements IChisel
 	private final String name;
 	private int fortuneLevel;
 	private ItemChisel chisel;
+	private boolean mod;
 	private boolean metal;
 	private int tickmod;
 	private int efficiencymod;
@@ -20,6 +21,7 @@ public class Chisel implements IChisel
 		setMetal(false);
 		setTickMod(0);
 		setEfficiencyMod(0);
+		setModification(false);
 	}
 
 	@Override
@@ -92,5 +94,17 @@ public class Chisel implements IChisel
 	public int getEfficiencyMod()
 	{
 		return efficiencymod;
+	}
+
+	@Override
+	public boolean isModification()
+	{
+		return mod;
+	}
+
+	@Override
+	public void setModification(boolean mod)
+	{
+		this.mod = mod;
 	}
 }

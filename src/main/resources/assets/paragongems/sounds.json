@@ -7,7 +7,7 @@
     "ting": {
         "category": "block",
         "subtitle": "Chiseling Ore",
-        "sounds": [ "paragongems:ting1","paragongems:ting2","paragongems:ting3","paragongems:ting4","paragongems:ting5" ]
+        "sounds": [ "paragongems:ting1","paragongems:ting2" ]
     },
     "break": {
         "category": "block",

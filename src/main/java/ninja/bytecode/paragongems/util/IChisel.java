@@ -26,5 +26,9 @@ public interface IChisel
 
 	public boolean isMetal();
 
+	public boolean isModification();
+
+	public void setModification(boolean mod);
+
 	public void setMetal(boolean metal);
 }

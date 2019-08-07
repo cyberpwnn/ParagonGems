@@ -9,7 +9,8 @@ public class ChiselSpinel extends Chisel
 		super("chisel_spinel", "Spinel Tipped Chisel");
 		setFortuneLevel(1);
 		setMetal(true);
-		setTickMod(-5);
+		setTickMod(-4);
 		setEfficiencyMod(-3);
+		setModification(true);
 	}
 }

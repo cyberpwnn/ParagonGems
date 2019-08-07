@@ -9,5 +9,6 @@ public class ChiselStone extends Chisel
 		super("chisel_stone", "Stone Chisel");
 		setFortuneLevel(1);
 		setMetal(false);
+		setEfficiencyMod(-5);
 	}
 }
