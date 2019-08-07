@@ -7,7 +7,7 @@ public class ChiselRuby extends Chisel
 	public ChiselRuby()
 	{
 		super("chisel_ruby", "Ruby Tipped Chisel");
-		setFortuneLevel(5);
+		setFortuneLevel(3);
 		setMetal(true);
 		setTickMod(2);
 		setEfficiencyMod(14);
