@@ -89,6 +89,14 @@ public class ItemChisel extends Item
 						stack.setItemDamage(stack.getItemDamage() + 1);
 						world.playSound(null, rt.getBlockPos().getX(), rt.getBlockPos().getY(), rt.getBlockPos().getZ(), chisel.isMetal() ? ProxyCommon.getTingSound() : ProxyCommon.getHitSound(), SoundCategory.BLOCKS, 1f, (random.nextFloat() / 4f) + 0.9f);
 					}
+
+					if(random.nextInt(100) == 0 && !chisel.isMetal())
+					{
+						stack.damageItem(stack.getMaxDamage() * 2, player);
+						world.playSound(null, rt.getBlockPos().getX(), rt.getBlockPos().getY(), rt.getBlockPos().getZ(), chisel.isMetal() ? ProxyCommon.getTingSound() : ProxyCommon.getHitSound(), SoundCategory.BLOCKS, 1f, (random.nextFloat() / 4f) + 0.1f);
+						world.playSound(null, rt.getBlockPos().getX(), rt.getBlockPos().getY(), rt.getBlockPos().getZ(), chisel.isMetal() ? ProxyCommon.getTingSound() : ProxyCommon.getHitSound(), SoundCategory.BLOCKS, 1f, (random.nextFloat() / 4f) + 0.5f);
+						world.playSound(null, rt.getBlockPos().getX(), rt.getBlockPos().getY(), rt.getBlockPos().getZ(), chisel.isMetal() ? ProxyCommon.getTingSound() : ProxyCommon.getHitSound(), SoundCategory.BLOCKS, 1f, (random.nextFloat() / 4f) + 1.2f);
+					}
 				}
 			}
 
