@@ -9,6 +9,8 @@ public class Chisel implements IChisel
 	private int fortuneLevel;
 	private ItemChisel chisel;
 	private boolean metal;
+	private int tickmod;
+	private int efficiencymod;
 
 	public Chisel(String id, String name)
 	{
@@ -16,6 +18,8 @@ public class Chisel implements IChisel
 		this.name = name;
 		setFortuneLevel(1);
 		setMetal(false);
+		setTickMod(0);
+		setEfficiencyMod(0);
 	}
 
 	@Override
@@ -64,5 +68,29 @@ public class Chisel implements IChisel
 	public void setMetal(boolean metal)
 	{
 		this.metal = metal;
+	}
+
+	@Override
+	public void setTickMod(int level)
+	{
+		this.tickmod = level;
+	}
+
+	@Override
+	public int getTickMod()
+	{
+		return tickmod;
+	}
+
+	@Override
+	public void setEfficiencyMod(int level)
+	{
+		this.efficiencymod = level;
+	}
+
+	@Override
+	public int getEfficiencyMod()
+	{
+		return efficiencymod;
 	}
 }

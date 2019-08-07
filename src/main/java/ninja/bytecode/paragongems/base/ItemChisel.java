@@ -32,7 +32,7 @@ public class ItemChisel extends Item
 		setRegistryName(chisel.getID());
 		this.chisel = chisel;
 		setMaxStackSize(1);
-		setMaxDamage(12 - chisel.getFortuneLevel() - (chisel.isMetal() ? 5 : 0));
+		setMaxDamage(12 - chisel.getFortuneLevel() - (chisel.isMetal() ? 5 : 0) + chisel.getEfficiencyMod());
 	}
 
 	@Override
@@ -51,7 +51,7 @@ public class ItemChisel extends Item
 			WorldServer world = player.getServerWorld();
 			IBlockState state = world.getBlockState(rt.getBlockPos());
 			Block hit = state.getBlock();
-			player.getCooldownTracker().setCooldown(this, 9 - chisel.getFortuneLevel());
+			player.getCooldownTracker().setCooldown(this, 9 - chisel.getFortuneLevel() + chisel.getTickMod());
 
 			if(hit instanceof BlockOre)
 			{

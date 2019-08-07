@@ -12,6 +12,14 @@ public interface IChisel
 
 	public int getFortuneLevel();
 
+	public void setTickMod(int level);
+
+	public int getTickMod();
+
+	public void setEfficiencyMod(int level);
+
+	public int getEfficiencyMod();
+
 	public void setChiselItem(ItemChisel chisel);
 
 	public ItemChisel getChiselItem();
