@@ -60,7 +60,7 @@ public class Gem implements IGem
 		setUseResourceBlocks(true);
 		setUseRocks(true);
 		setOregenDimension(0);
-		setOreHeightRange(1, 254);
+		setOreHeightRange(1, 127);
 		hash = UUID.nameUUIDFromBytes((getID() + "-o-" + getName()).getBytes()).getMostSignificantBits() + 10000 * Short.MAX_VALUE;
 		System.out.println(getName() + " Gem's Hash = " + hash);
 	}
@@ -418,13 +418,13 @@ public class Gem implements IGem
 					int i = (chunkX << 4) + ii + 1;
 					int j = (chunkZ << 4) + jj + 1;
 
-					if(gate.noise(i / 8D, j / 8D) < 0.73)
+					if(gate.noise(i / 8D, j / 8D) < 0.80)
 					{
 						continue;
 					}
 
 					double r = getOreMaximumHeight() - getOreMinimumHeight();
-					double a = getOreMinimumHeight() + (((superHeight.noise(i / 641D, j / 641D) / 2D) + 0.5D) * r);
+					double a = getOreMinimumHeight() + (((superHeight.noise(i / 300D, j / 300D) / 2D) + 0.5D) * r);
 					double b = 4.155D * ((subHeight.noise(j / 8.534D, i / 8.534D) / 2D) + 0.5D);
 					BlockPos p = new BlockPos(i, (int) Math.round((a - 4.155D) + b), j);
 

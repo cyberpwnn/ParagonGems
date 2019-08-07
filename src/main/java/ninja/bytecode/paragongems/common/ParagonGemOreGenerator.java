@@ -12,7 +12,7 @@ import ninja.bytecode.paragongems.util.IGem;
 
 public class ParagonGemOreGenerator implements IWorldGenerator
 {
-	public static boolean DEBUG_GENERATOR_NO_STONE = true;
+	public static boolean DEBUG_GENERATOR_NO_STONE = false;
 
 	@Override
 	public void generate(Random random, int chunkX, int chunkZ, World world, IChunkGenerator chunkGenerator, IChunkProvider chunkProvider)
