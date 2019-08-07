@@ -1,7 +1,6 @@
 {
    "parent": "item/handheld",
    "textures": {
-       "layer0": "paragongems:items/jasper_shard"
+       "layer0": "paragongems:items/gemx_rock"
    }
 }
-

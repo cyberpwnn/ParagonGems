@@ -58,9 +58,9 @@ public class ProxyClient extends ProxyCommon implements IProxy
 		{
 			registerRenderers(i.getGemItem());
 
-			if(i.hasShard())
+			if(i.hasRocks())
 			{
-				registerRenderers(i.getGemShardItem());
+				registerRenderers(i.getGemRockItem());
 			}
 
 			if(i.hasOre())

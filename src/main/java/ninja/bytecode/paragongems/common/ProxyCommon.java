@@ -21,7 +21,7 @@ import ninja.bytecode.paragongems.base.BlockGem;
 import ninja.bytecode.paragongems.base.BlockGemOre;
 import ninja.bytecode.paragongems.base.ItemChisel;
 import ninja.bytecode.paragongems.base.ItemGem;
-import ninja.bytecode.paragongems.base.ItemGemShard;
+import ninja.bytecode.paragongems.base.ItemGemRock;
 import ninja.bytecode.paragongems.base.ParagonCreativeTab;
 import ninja.bytecode.paragongems.gems.GemSapphire;
 import ninja.bytecode.paragongems.util.BaseProxy;
@@ -62,12 +62,12 @@ public class ProxyCommon extends BaseProxy implements IProxy
 			i.setGemItem(ig);
 			i("Registering Gem: " + i.getName());
 
-			if(i.hasShard())
+			if(i.hasRocks())
 			{
-				ItemGemShard is = new ItemGemShard(i);
+				ItemGemRock is = new ItemGemRock(i);
 				tabber.add(() -> is.setCreativeTab(tab));
-				i.setGemShardItem(is);
-				i("Registering Shard: " + i.getName());
+				i.setGemRockItem(is);
+				i("Registering Rock: " + i.getName());
 			}
 
 			if(i.hasOre())

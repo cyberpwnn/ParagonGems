@@ -9,7 +9,7 @@ import net.minecraft.world.biome.Biome;
 import ninja.bytecode.paragongems.base.BlockGem;
 import ninja.bytecode.paragongems.base.BlockGemOre;
 import ninja.bytecode.paragongems.base.ItemGem;
-import ninja.bytecode.paragongems.base.ItemGemShard;
+import ninja.bytecode.paragongems.base.ItemGemRock;
 import ninja.bytecode.paragongems.common.ProxyCommon;
 
 public class Gem implements IGem
@@ -17,7 +17,7 @@ public class Gem implements IGem
 	private final String id;
 	private final String name;
 	private ItemGem gem;
-	private ItemGemShard gemShard;
+	private ItemGemRock gemRock;
 	private BlockGemOre ore;
 	private BlockGem block;
 	private Item itemBlockOre;
@@ -30,10 +30,9 @@ public class Gem implements IGem
 	private float resistance;
 	private int minXp;
 	private int maxXp;
-	private int shardCount;
 	private int harvestLevel;
 	private boolean oregen;
-	private boolean shards;
+	private boolean rocks;
 	private boolean resourceblock;
 
 	public Gem(String id, String name)
@@ -46,10 +45,9 @@ public class Gem implements IGem
 		setHardness(3F);
 		setResistance(5F);
 		setHarvestLevel(2);
-		setShardCount(3);
 		setGenerateOre(true);
 		setUseResourceBlocks(true);
-		setUseShards(true);
+		setUseRocks(true);
 	}
 
 	@Override
@@ -94,7 +92,6 @@ public class Gem implements IGem
 	public void setGemOreItem(Item ib)
 	{
 		this.itemBlockOre = ib;
-
 	}
 
 	@Override
@@ -262,39 +259,27 @@ public class Gem implements IGem
 	}
 
 	@Override
-	public void setGemShardItem(ItemGemShard gem)
+	public void setGemRockItem(ItemGemRock gem)
 	{
-		this.gemShard = gem;
+		this.gemRock = gem;
 	}
 
 	@Override
-	public ItemGemShard getGemShardItem()
+	public ItemGemRock getGemRockItem()
 	{
-		return gemShard;
+		return gemRock;
 	}
 
 	@Override
-	public boolean hasShard()
+	public boolean hasRocks()
 	{
-		return shards;
+		return rocks;
 	}
 
 	@Override
-	public void setUseShards(boolean rb)
+	public void setUseRocks(boolean rb)
 	{
-		this.shards = rb;
-	}
-
-	@Override
-	public int getShardCount()
-	{
-		return shardCount;
-	}
-
-	@Override
-	public void setShardCount(int rb)
-	{
-		this.shardCount = rb;
+		this.rocks = rb;
 	}
 
 	public static IGem getGem(Block item)
@@ -319,9 +304,9 @@ public class Gem implements IGem
 			((ItemGem) item).getGem();
 		}
 
-		else if(item instanceof ItemGemShard)
+		else if(item instanceof ItemGemRock)
 		{
-			((ItemGemShard) item).getGem();
+			((ItemGemRock) item).getGem();
 		}
 
 		else if(item instanceof ItemBlock && ((ItemBlock) item).getBlock() instanceof BlockGemOre)

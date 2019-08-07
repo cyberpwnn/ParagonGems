@@ -1,7 +1,7 @@
 {
    "parent": "item/handheld",
    "textures": {
-       "layer0": "paragongems:items/turquoise_shard"
+       "layer0": "paragongems:items/tanzanite_rock"
    }
 }
 

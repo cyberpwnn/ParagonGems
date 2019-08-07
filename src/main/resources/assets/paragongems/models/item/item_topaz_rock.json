@@ -1,6 +1,7 @@
 {
    "parent": "item/handheld",
    "textures": {
-       "layer0": "paragongems:items/gemx_shard"
+       "layer0": "paragongems:items/topaz_rock"
    }
 }
+

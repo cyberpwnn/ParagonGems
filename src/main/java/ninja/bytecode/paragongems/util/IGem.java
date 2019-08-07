@@ -7,7 +7,7 @@ import net.minecraft.world.biome.Biome;
 import ninja.bytecode.paragongems.base.BlockGem;
 import ninja.bytecode.paragongems.base.BlockGemOre;
 import ninja.bytecode.paragongems.base.ItemGem;
-import ninja.bytecode.paragongems.base.ItemGemShard;
+import ninja.bytecode.paragongems.base.ItemGemRock;
 
 /**
  * Represents a gem which can be used to register items and blocks for each gem
@@ -33,7 +33,7 @@ public interface IGem
 
 	public void setGemItem(ItemGem gem);
 
-	public void setGemShardItem(ItemGemShard gem);
+	public void setGemRockItem(ItemGemRock gem);
 
 	public void setGemOre(BlockGemOre block);
 
@@ -45,7 +45,7 @@ public interface IGem
 
 	public ItemGem getGemItem();
 
-	public ItemGemShard getGemShardItem();
+	public ItemGemRock getGemRockItem();
 
 	public void setGemOreItem(Item ib);
 
@@ -97,11 +97,7 @@ public interface IGem
 
 	public void setUseResourceBlocks(boolean rb);
 
-	public boolean hasShard();
+	public boolean hasRocks();
 
-	public void setUseShards(boolean rb);
-
-	public int getShardCount();
-
-	public void setShardCount(int rb);
+	public void setUseRocks(boolean rb);
 }

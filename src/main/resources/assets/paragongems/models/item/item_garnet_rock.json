@@ -1,7 +1,7 @@
 {
    "parent": "item/handheld",
    "textures": {
-       "layer0": "paragongems:items/amethyst_shard"
+       "layer0": "paragongems:items/garnet_rock"
    }
 }
 

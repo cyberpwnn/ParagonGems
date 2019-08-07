@@ -130,7 +130,7 @@ public class Utilities
 
 				for(IGem i : ProxyCommon.getGems())
 				{
-					pw.println("item.item_" + i.getID() + "_shard.name=" + i.getName() + " Shard");
+					pw.println("item.item_" + i.getID() + "_rock.name=" + i.getName() + " Rock");
 					pw.println("item.item_" + i.getID() + ".name=" + i.getName());
 					pw.println("tile.block_" + i.getID() + "_ore.name=" + i.getName() + " Ore");
 					pw.println("tile.block_" + i.getID() + ".name=" + i.getName() + " Block");
@@ -251,9 +251,9 @@ public class Utilities
 					}
 				}
 
-				// Item Models (shards)
+				// Item Models (rock)
 				File itemModels3 = new File(res, "assets/" + ParagonGems.MODID + "/models/item");
-				File itemModelDemo3 = new File(itemModels3, "item_gemx_shard.json");
+				File itemModelDemo3 = new File(itemModels3, "item_gemx_rock.json");
 
 				if(itemModelDemo3.exists())
 				{
@@ -261,7 +261,7 @@ public class Utilities
 
 					for(IGem i : ProxyCommon.getGems())
 					{
-						File gemJSON = new File(itemModels3, "item_" + i.getID() + "_shard.json");
+						File gemJSON = new File(itemModels3, "item_" + i.getID() + "_rock.json");
 						VIO.writeAll(gemJSON, text.replaceAll("\\Qgemx\\E", i.getID()));
 						System.out.println("Updated " + gemJSON.getPath());
 					}
