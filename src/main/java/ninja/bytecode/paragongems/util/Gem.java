@@ -7,12 +7,14 @@ import net.minecraft.world.biome.Biome;
 import ninja.bytecode.paragongems.base.BlockGem;
 import ninja.bytecode.paragongems.base.BlockGemOre;
 import ninja.bytecode.paragongems.base.ItemGem;
+import ninja.bytecode.paragongems.base.ItemGemShard;
 
 public class Gem implements IGem
 {
 	private final String id;
 	private final String name;
 	private ItemGem gem;
+	private ItemGemShard gemShard;
 	private BlockGemOre ore;
 	private BlockGem block;
 	private Item itemBlockOre;
@@ -25,8 +27,10 @@ public class Gem implements IGem
 	private float resistance;
 	private int minXp;
 	private int maxXp;
+	private int shardCount;
 	private int harvestLevel;
 	private boolean oregen;
+	private boolean shards;
 	private boolean resourceblock;
 
 	public Gem(String id, String name)
@@ -39,8 +43,10 @@ public class Gem implements IGem
 		setHardness(3F);
 		setResistance(5F);
 		setHarvestLevel(2);
+		setShardCount(3);
 		setGenerateOre(true);
 		setUseResourceBlocks(true);
+		setUseShards(true);
 	}
 
 	@Override
@@ -250,5 +256,41 @@ public class Gem implements IGem
 	public Item getGemBlockItem()
 	{
 		return itemBlock;
+	}
+
+	@Override
+	public void setGemShardItem(ItemGemShard gem)
+	{
+		this.gemShard = gem;
+	}
+
+	@Override
+	public ItemGemShard getGemShardItem()
+	{
+		return gemShard;
+	}
+
+	@Override
+	public boolean hasShards()
+	{
+		return shards;
+	}
+
+	@Override
+	public void setUseShards(boolean rb)
+	{
+		this.shards = rb;
+	}
+
+	@Override
+	public int getShardCount()
+	{
+		return shardCount;
+	}
+
+	@Override
+	public void setShardCount(int rb)
+	{
+		this.shardCount = rb;
 	}
 }
