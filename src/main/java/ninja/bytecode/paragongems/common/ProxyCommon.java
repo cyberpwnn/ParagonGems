@@ -6,11 +6,17 @@ import java.util.List;
 import java.util.Map;
 
 import net.minecraft.block.Block;
+import net.minecraft.init.Blocks;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemBlock;
 import net.minecraft.util.ResourceLocation;
+import net.minecraft.util.SoundCategory;
 import net.minecraft.util.SoundEvent;
+import net.minecraft.util.math.BlockPos;
+import net.minecraft.world.World;
+import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.event.RegistryEvent;
+import net.minecraftforge.event.world.BlockEvent;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.event.FMLInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLPostInitializationEvent;
@@ -38,6 +44,8 @@ import scala.util.Random;
 public class ProxyCommon extends BaseProxy implements IProxy
 {
 	public static final Random random = new Random();
+	private final static long timeRange = 120000;
+	private long lastGeneratedFromLava = System.currentTimeMillis() - timeRange;
 	private final static Map<String, SoundEvent> sounds = new HashMap<>();
 	private final static List<IGem> gems = Utilities.getInstances(Gem.class, ParagonGems.GEMS);
 	private final static List<IChisel> chisels = Utilities.getInstances(Chisel.class, ParagonGems.CHISELS);
@@ -129,6 +137,59 @@ public class ProxyCommon extends BaseProxy implements IProxy
 	}
 
 	@SubscribeEvent
+	public void onFluidDrain(BlockEvent e)
+	{
+		double rarity = 0;
+
+		if(lastGeneratedFromLava > System.currentTimeMillis())
+		{
+			return;
+		}
+
+		if(System.currentTimeMillis() - lastGeneratedFromLava < timeRange)
+		{
+			rarity += 1D - ((double) (System.currentTimeMillis() - lastGeneratedFromLava) / timeRange);
+		}
+
+		System.out.println(rarity);
+
+		BlockPos pos = e.getPos();
+		World w = e.getWorld();
+		Block type = e.getState().getBlock();
+
+		if(type.getLocalizedName().equals(Blocks.LAVA.getLocalizedName()) && Math.random() * Math.random() > rarity)
+		{
+			BlockPos below = pos.add(0, -1, 0);
+			Block b = w.getBlockState(below).getBlock();
+
+			if(b.equals(Blocks.STONE))
+			{
+				IGem gem = null;
+
+				while(gem == null)
+				{
+					IGem g = Gem.getRandomGem();
+
+					if(g.hasOre())
+					{
+						gem = g;
+					}
+				}
+
+				if(System.currentTimeMillis() > lastGeneratedFromLava)
+				{
+					lastGeneratedFromLava += (Math.abs(System.currentTimeMillis() - lastGeneratedFromLava)) / 1.5D;
+				}
+
+				w.setBlockState(below, gem.getGemOre().getDefaultState());
+				w.playSound(null, below, getGemSound(), SoundCategory.BLOCKS, 1f, (float) (0.1f + (Math.random()) * 1.25f));
+				w.playSound(null, below, getGemSound(), SoundCategory.BLOCKS, 1f, (float) (0.1f + (Math.random()) * 1.25f));
+				w.playSound(null, below, getGemSound(), SoundCategory.BLOCKS, 1f, (float) (0.1f + (Math.random()) * 1.25f));
+			}
+		}
+	}
+
+	@SubscribeEvent
 	public static void registerBlocks(RegistryEvent.Register<Block> e)
 	{
 		for(IGem i : getGems())
@@ -176,6 +237,7 @@ public class ProxyCommon extends BaseProxy implements IProxy
 	public void onPostEvent(FMLPostInitializationEvent e)
 	{
 		getLogger().info("Common Post Init");
+		MinecraftForge.EVENT_BUS.register(this);
 	}
 
 	private static void register(RegistryEvent.Register<SoundEvent> e, String... fs)

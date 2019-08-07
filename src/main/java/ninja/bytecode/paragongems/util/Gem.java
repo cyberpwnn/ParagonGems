@@ -60,7 +60,7 @@ public class Gem implements IGem
 		setUseResourceBlocks(true);
 		setUseRocks(true);
 		setOregenDimension(0);
-		setOreHeightRange(1, 127);
+		setOreHeightRange(1, 254);
 		hash = UUID.nameUUIDFromBytes((getID() + "-o-" + getName()).getBytes()).getMostSignificantBits() + 10000 * Short.MAX_VALUE;
 		System.out.println(getName() + " Gem's Hash = " + hash);
 	}
@@ -400,6 +400,48 @@ public class Gem implements IGem
 	}
 
 	@Override
+	public int getYLevel(World world, int chunkX, int chunkZ)
+	{
+		int dim = world.provider.getDimension();
+
+		if((dim > 1 || dim < -1 && oregenDimension == 0) || dim == oregenDimension)
+		{
+			Block replacer = oregenDimension == 0 ? Blocks.STONE : oregenDimension == -1 ? Blocks.NETHERRACK : oregenDimension == 1 ? Blocks.END_STONE : Blocks.STONE;
+			SimplexNoiseGenerator superHeight = new SimplexNoiseGenerator(hash - world.getSeed());
+			SimplexNoiseGenerator subHeight = new SimplexNoiseGenerator(hash + world.getSeed());
+			SimplexNoiseGenerator gate = new SimplexNoiseGenerator(hash - world.getSeed());
+			double im = 0;
+			double ih = 0;
+			for(int ii = 0; ii < 16; ii += 14)
+			{
+				for(int jj = 0; jj < 16; jj += 14)
+				{
+					int i = (chunkX << 4) + ii + 1;
+					int j = (chunkZ << 4) + jj + 1;
+					gate.noise(i / 8D, j / 8D);
+					double r = getOreMaximumHeight() - getOreMinimumHeight();
+					double a = getOreMinimumHeight() + (((superHeight.noise(i / 3000D, j / 3000D) / 2D) + 0.5D) * r);
+					double b = 4.155D * ((subHeight.noise(j / 8.534D, i / 8.534D) / 2D) + 0.5D);
+					im += ((a - 4.155D) + b);
+					ih += world.getHeight(i, j);
+				}
+			}
+
+			int y = (int) Math.round(im / 4D);
+			int h = (int) Math.round(ih / 4D);
+
+			if(h < y)
+			{
+				return -y;
+			}
+
+			return y;
+		}
+
+		return -1;
+	}
+
+	@Override
 	public void generate(Random random, int chunkX, int chunkZ, World world, IChunkGenerator chunkGenerator, IChunkProvider chunkProvider)
 	{
 		int dim = world.provider.getDimension();
@@ -418,13 +460,13 @@ public class Gem implements IGem
 					int i = (chunkX << 4) + ii + 1;
 					int j = (chunkZ << 4) + jj + 1;
 
-					if(gate.noise(i / 8D, j / 8D) < 0.80)
+					if(gate.noise(i / 8D, j / 8D) < 0.85)
 					{
 						continue;
 					}
 
 					double r = getOreMaximumHeight() - getOreMinimumHeight();
-					double a = getOreMinimumHeight() + (((superHeight.noise(i / 300D, j / 300D) / 2D) + 0.5D) * r);
+					double a = getOreMinimumHeight() + (((superHeight.noise(i / 3000D, j / 3000D) / 2D) + 0.5D) * r);
 					double b = 4.155D * ((subHeight.noise(j / 8.534D, i / 8.534D) / 2D) + 0.5D);
 					BlockPos p = new BlockPos(i, (int) Math.round((a - 4.155D) + b), j);
 

@@ -10,6 +10,7 @@ import net.minecraftforge.fml.common.SidedProxy;
 import net.minecraftforge.fml.common.event.FMLInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLPostInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
+import net.minecraftforge.fml.common.event.FMLServerStartingEvent;
 import ninja.bytecode.paragongems.util.IProxy;
 import ninja.bytecode.paragongems.util.Utilities;
 
@@ -46,6 +47,13 @@ public class ParagonGems
 	public void postInit(FMLPostInitializationEvent event)
 	{
 		proxy.onPostEvent(event);
+	}
+
+	@EventHandler
+	public void init(FMLServerStartingEvent event)
+	{
+		logger.info("Registering Paragon Command");
+		event.registerServerCommand(new CommandParagon());
 	}
 
 	public static void main(String[] a)
