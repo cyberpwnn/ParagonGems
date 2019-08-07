@@ -1,0 +1,17 @@
+{
+    "type": "minecraft:crafting_shaped",
+    "pattern": [
+        "###",
+        "###",
+        "###"
+    ],
+    "key": {
+        "#": {
+            "item": "paragongems:item_gemx"
+        }
+    },
+    "result": {
+        "item": "paragongems:block_gemx",
+        "count": 1
+    }
+}
