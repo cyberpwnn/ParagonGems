@@ -70,6 +70,8 @@ public class Utilities
 		{
 			classes.addAll(findClasses(directory, packageName));
 		}
+		System.out.println("Found " + classes.size() + " Classes");
+
 		return classes.toArray(new Class[classes.size()]);
 	}
 

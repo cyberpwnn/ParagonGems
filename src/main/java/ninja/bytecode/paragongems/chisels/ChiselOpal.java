@@ -10,6 +10,7 @@ public class ChiselOpal extends Chisel
 		setFortuneLevel(7);
 		setMetal(true);
 		setTickMod(8);
+		setDescription("This chisel is tipped with Opal. Find more material per ore block very quickly.");
 		setEfficiencyMod(1);
 		setModification(true);
 	}

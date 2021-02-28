@@ -10,6 +10,7 @@ public class ChiselSpinel extends Chisel
 		setFortuneLevel(1);
 		setMetal(true);
 		setTickMod(-4);
+		setDescription("This chisel is tipped with Spinel. Get material out of ores quickly.");
 		setEfficiencyMod(-3);
 		setModification(true);
 	}

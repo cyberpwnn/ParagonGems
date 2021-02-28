@@ -30,7 +30,8 @@ import ninja.bytecode.paragongems.base.ItemChisel;
 import ninja.bytecode.paragongems.base.ItemGem;
 import ninja.bytecode.paragongems.base.ItemGemRock;
 import ninja.bytecode.paragongems.base.ParagonCreativeTab;
-import ninja.bytecode.paragongems.gems.GemSapphire;
+import ninja.bytecode.paragongems.chisels.*;
+import ninja.bytecode.paragongems.gems.*;
 import ninja.bytecode.paragongems.util.BaseProxy;
 import ninja.bytecode.paragongems.util.Chisel;
 import ninja.bytecode.paragongems.util.Gem;
@@ -47,9 +48,49 @@ public class ProxyCommon extends BaseProxy implements IProxy
 	private final static long timeRange = 120000;
 	private long lastGeneratedFromLava = System.currentTimeMillis() - timeRange;
 	private final static Map<String, SoundEvent> sounds = new HashMap<>();
-	private final static List<IGem> gems = Utilities.getInstances(Gem.class, ParagonGems.GEMS);
-	private final static List<IChisel> chisels = Utilities.getInstances(Chisel.class, ParagonGems.CHISELS);
+	private final static List<IGem> gems = registerGems();
+	private final static List<IChisel> chisels = registerChisels();
 	private static ParagonCreativeTab tab;
+
+
+
+	private static List<IGem> registerGems() {
+		List<IGem> gem = new ArrayList<>();
+
+		gem.add(new GemAgate());
+		gem.add(new GemAmethyst());
+		gem.add(new GemBeryl());
+		gem.add(new GemBloodstone());
+		gem.add(new GemCarnelian());
+		gem.add(new GemDiopside());
+		gem.add(new GemGarnet());
+		gem.add(new GemJasper());
+		gem.add(new GemMoonstone());
+		gem.add(new GemOnyx());
+		gem.add(new GemOpal());
+		gem.add(new GemRuby());
+		gem.add(new GemSapphire());
+		gem.add(new GemSpinel());
+		gem.add(new GemTanzanite());
+		gem.add(new GemTopaz());
+		gem.add(new GemTourmaline());
+		gem.add(new GemTurquoise());
+		gem.add(new GemZircon());
+
+		return gem;
+	}
+
+	private static List<IChisel> registerChisels() {
+		List<IChisel> g = new ArrayList<>();
+
+		g.add(new ChiselIron());
+		g.add(new ChiselOpal());
+		g.add(new ChiselRuby());
+		g.add(new ChiselSpinel());
+		g.add(new ChiselStone());
+
+		return g;
+	}
 
 	@Override
 	public void onPreInit(FMLPreInitializationEvent e)

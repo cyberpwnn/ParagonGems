@@ -6,6 +6,7 @@ public class Chisel implements IChisel
 {
 	private final String id;
 	private final String name;
+	private String description;
 	private int fortuneLevel;
 	private ItemChisel chisel;
 	private boolean mod;
@@ -19,9 +20,20 @@ public class Chisel implements IChisel
 		this.name = name;
 		setFortuneLevel(1);
 		setMetal(false);
+		setDescription("A chisel used to release ores from stone.");
 		setTickMod(0);
 		setEfficiencyMod(0);
 		setModification(false);
+	}
+
+	public void setDescription(String description)
+	{
+		this.description = description;
+	}
+
+	public String getDescription()
+	{
+		return description;
 	}
 
 	@Override

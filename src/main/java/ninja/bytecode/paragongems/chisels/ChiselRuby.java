@@ -10,6 +10,7 @@ public class ChiselRuby extends Chisel
 		setFortuneLevel(3);
 		setMetal(true);
 		setTickMod(3);
+		setDescription("This chisel is tipped with Ruby. Find more material per ore block.");
 		setEfficiencyMod(7);
 		setModification(true);
 	}
