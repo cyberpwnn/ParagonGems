@@ -1,0 +1,25 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern":
+  [
+    "xxa",
+    "x x",
+    "xxx"
+  ],
+  "key":
+  {
+    "i":
+    {
+      "tag": "forge:gems/diamond"
+    },
+    "s":
+    {
+      "item": "paragongems:chisel_iron"
+    }
+  },
+  "result":
+  {
+    "item": "paragongems:chisel_iron",
+    "count": 1
+  }
+}

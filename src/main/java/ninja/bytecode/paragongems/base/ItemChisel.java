@@ -92,7 +92,7 @@ public class ItemChisel extends Item
 						world.playSound(null, rt.getBlockPos().getX(), rt.getBlockPos().getY(), rt.getBlockPos().getZ(), chisel.isMetal() ? ProxyCommon.getTingSound() : ProxyCommon.getHitSound(), SoundCategory.BLOCKS, 1f, (random.nextFloat() / 4f) + 0.9f);
 					}
 
-					world.spawnParticle(EnumParticleTypes.ITEM_CRACK, rt.getBlockPos().getX() + 0.5, rt.getBlockPos().getY() + 0.5, rt.getBlockPos().getZ() + 0.5, 12, 0, 0, 0, 0.11f, is.getItem().getIdFromItem(is.getItem()), is.getItemDamage());
+					world.spawnParticle(EnumParticleTypes.ITEM_CRACK, rt.getBlockPos().getX() + 0.5, rt.getBlockPos().getY() + 0.5, rt.getBlockPos().getZ() + 0.5, 12, 0, 0, 0, 0.761f, is.getItem().getIdFromItem(is.getItem()), is.getItemDamage());
 
 					if(random.nextInt(125) == 0 && !chisel.isMetal())
 					{

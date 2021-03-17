@@ -21,6 +21,7 @@ import ninja.bytecode.paragongems.common.ProxyCommon;
 
 public class Gem implements IGem
 {
+	private static final double GLOBAL_GEN_MULTIPLIER = 0.775;
 	private final String id;
 	private final String name;
 	private ItemGem gem;
@@ -41,6 +42,7 @@ public class Gem implements IGem
 	private int minHeight;
 	private int maxHeight;
 	private int harvestLevel;
+	private double genChance;
 	private boolean oregen;
 	private boolean rocks;
 	private boolean resourceblock;
@@ -61,8 +63,19 @@ public class Gem implements IGem
 		setUseRocks(true);
 		setOregenDimension(0);
 		setOreHeightRange(1, 254);
+		setGenChance(0.15);
 		hash = UUID.nameUUIDFromBytes((getID() + "-o-" + getName()).getBytes()).getMostSignificantBits() + 10000 * Short.MAX_VALUE;
 		System.out.println(getName() + " Gem's Hash = " + hash);
+	}
+
+	public void setGenChance(double genChance)
+	{
+		this.genChance = genChance;
+	}
+
+	public double getGenChance()
+	{
+		return genChance;
 	}
 
 	@Override
@@ -460,7 +473,7 @@ public class Gem implements IGem
 					int i = (chunkX << 4) + ii + 1;
 					int j = (chunkZ << 4) + jj + 1;
 
-					if(gate.noise(i / 8D, j / 8D) < 0.85)
+					if(gate.noise(i / 8D, j / 8D) > getGenChance() * GLOBAL_GEN_MULTIPLIER)
 					{
 						continue;
 					}
