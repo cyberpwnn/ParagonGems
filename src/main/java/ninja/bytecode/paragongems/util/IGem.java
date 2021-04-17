@@ -7,10 +7,7 @@ import net.minecraft.world.World;
 import net.minecraft.world.biome.Biome;
 import net.minecraft.world.chunk.IChunkProvider;
 import net.minecraft.world.gen.IChunkGenerator;
-import ninja.bytecode.paragongems.base.BlockGem;
-import ninja.bytecode.paragongems.base.BlockGemOre;
-import ninja.bytecode.paragongems.base.ItemGem;
-import ninja.bytecode.paragongems.base.ItemGemRock;
+import ninja.bytecode.paragongems.base.*;
 
 /**
  * Represents a gem which can be used to register items and blocks for each gem
@@ -26,6 +23,8 @@ public interface IGem
 	 * @return the gem base id
 	 */
 	public String getID();
+
+	public GemTinkerModifier getModifier();
 
 	/**
 	 * Get the single word name of this gem type such as "Sapphire"

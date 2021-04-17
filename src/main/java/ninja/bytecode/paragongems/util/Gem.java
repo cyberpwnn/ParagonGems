@@ -12,10 +12,7 @@ import net.minecraft.world.World;
 import net.minecraft.world.biome.Biome;
 import net.minecraft.world.chunk.IChunkProvider;
 import net.minecraft.world.gen.IChunkGenerator;
-import ninja.bytecode.paragongems.base.BlockGem;
-import ninja.bytecode.paragongems.base.BlockGemOre;
-import ninja.bytecode.paragongems.base.ItemGem;
-import ninja.bytecode.paragongems.base.ItemGemRock;
+import ninja.bytecode.paragongems.base.*;
 import ninja.bytecode.paragongems.common.ParagonGemOreGenerator;
 import ninja.bytecode.paragongems.common.ProxyCommon;
 
@@ -23,6 +20,7 @@ public class Gem implements IGem
 {
 	private static final double GLOBAL_GEN_MULTIPLIER = 0.775;
 	private final String id;
+	private GemTinkerModifier modifier;
 	private final String name;
 	private ItemGem gem;
 	private ItemGemRock gemRock;
@@ -76,6 +74,16 @@ public class Gem implements IGem
 	public double getGenChance()
 	{
 		return genChance;
+	}
+
+	public void setModifier(GemTinkerModifier modifier)
+	{
+		this.modifier = modifier;
+	}
+
+	public GemTinkerModifier getModifier()
+	{
+		return modifier;
 	}
 
 	@Override

@@ -39,7 +39,11 @@ import ninja.bytecode.paragongems.util.IChisel;
 import ninja.bytecode.paragongems.util.IGem;
 import ninja.bytecode.paragongems.util.IProxy;
 import ninja.bytecode.paragongems.util.Utilities;
+import scala.reflect.internal.Trees;
 import scala.util.Random;
+import slimeknights.mantle.util.RecipeMatch;
+import slimeknights.tconstruct.library.TinkerRegistry;
+import slimeknights.tconstruct.tools.TinkerModifiers;
 
 @Mod.EventBusSubscriber(modid = ParagonGems.MODID)
 public class ProxyCommon extends BaseProxy implements IProxy
@@ -141,10 +145,25 @@ public class ProxyCommon extends BaseProxy implements IProxy
 				i.setGemBlock(bg);
 				i.setGemBlockItem(ib);
 			}
+
+			if(i.getModifier() != null)
+			{
+				i("Register modifier " + i.getModifier().getIdentifier());
+				try
+				{
+					TinkerRegistry.registerModifier(i.getModifier());
+				}
+
+				catch(Throwable exf)
+				{
+
+				}
+				i.getModifier().addRecipeMatch(RecipeMatch.of(i.getModifier().gem.getGemItem(), i.getModifier().count));
+			}
 		}
 
 		tab = new ParagonCreativeTab(new GemSapphire());
-		tabber.forEach((r) -> r.run());
+		tabber.forEach(Runnable::run);
 	}
 
 	@SubscribeEvent

@@ -23,7 +23,7 @@ public class ParagonCreativeTab extends CreativeTabs
 			}
 		}
 
-		icon = new ItemStack(Items.EMERALD);
+		icon = new ItemStack(gem.getGemItem());
 	}
 
 	@Override

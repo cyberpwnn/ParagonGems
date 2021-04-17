@@ -13,9 +13,14 @@ import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLServerStartingEvent;
 import ninja.bytecode.paragongems.util.IProxy;
 import ninja.bytecode.paragongems.util.Utilities;
+import slimeknights.tconstruct.library.modifiers.ModifierTrait;
+import slimeknights.tconstruct.tools.TinkerModifiers;
 
 @Mod.EventBusSubscriber(modid = ParagonGems.MODID)
-@Mod(modid = MODID, name = NAME, version = VERSION)
+@Mod(modid = MODID, name = NAME, version = VERSION, dependencies =
+		"required-after:forge@[14.23.5.2847,);"
+		+ "required-after:mantle@[1.12-1.3.1.21,);"
+		+ "required-after:tconstruct@[1.12-2.10,)")
 public class ParagonGems
 {
 	public static final String GEMS = "ninja.bytecode.paragongems.gems";
