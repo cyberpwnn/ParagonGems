@@ -88,3 +88,7 @@ modifier.pg-shielded.desc=§bShielded§r\nThis tool will absorb shield up to 25 
 modifier.pg-shielded.name=§bShielded
 modifier.pg-domination.desc=§bDominate Things§r\nIncreases Critical Hit Damage by 25% per level (multiplicitive!!!).
 modifier.pg-domination.name=§bDomination
+modifier.pg-organ.desc=§cAn extention of you!§r\nThis tool's durability becomes your health bar, damage & healing.
+modifier.pg-organ.name=§cOrgan
+modifier.pg-damage-inoculation.desc=§eReversal of Damage & Healing§r\nThis tool's tracks the damage & healing on it and slowly applies it in the reverse direction over time.
+modifier.pg-damage-inoculation.name=§eDamage Inoculation
