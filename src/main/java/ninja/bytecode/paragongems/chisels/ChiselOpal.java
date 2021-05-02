@@ -1,5 +1,6 @@
 package ninja.bytecode.paragongems.chisels;
 
+import ninja.bytecode.paragongems.gems.GemOpal;
 import ninja.bytecode.paragongems.util.Chisel;
 
 public class ChiselOpal extends Chisel
@@ -13,5 +14,6 @@ public class ChiselOpal extends Chisel
 		setDescription("This chisel is tipped with Opal. Find more material per ore block very quickly.");
 		setEfficiencyMod(1);
 		setModification(true);
+		setTip(new GemOpal());
 	}
 }

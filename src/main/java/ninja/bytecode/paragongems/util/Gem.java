@@ -18,7 +18,7 @@ import ninja.bytecode.paragongems.common.ProxyCommon;
 
 public class Gem implements IGem
 {
-	private static final double GLOBAL_GEN_MULTIPLIER = 0.775;
+	private static final double GLOBAL_GEN_MULTIPLIER = 1;
 	private final String id;
 	private GemTinkerModifier modifier;
 	private final String name;
@@ -61,7 +61,7 @@ public class Gem implements IGem
 		setUseRocks(true);
 		setOregenDimension(0);
 		setOreHeightRange(1, 254);
-		setGenChance(0.005);
+		setGenChance(0.05);
 		hash = UUID.nameUUIDFromBytes((getID() + "-o-" + getName()).getBytes()).getMostSignificantBits() + 10000 * Short.MAX_VALUE;
 		System.out.println(getName() + " Gem's Hash = " + hash);
 	}
@@ -467,7 +467,7 @@ public class Gem implements IGem
 	{
 		int dim = world.provider.getDimension();
 
-		if((dim > 1 || dim < -1 && oregenDimension == 0) || dim == oregenDimension)
+		if(oregenDimension == dim)
 		{
 			Block replacer = oregenDimension == 0 ? Blocks.STONE : oregenDimension == -1 ? Blocks.NETHERRACK : oregenDimension == 1 ? Blocks.END_STONE : Blocks.STONE;
 			SimplexNoiseGenerator superHeight = new SimplexNoiseGenerator(hash - world.getSeed());
@@ -481,7 +481,7 @@ public class Gem implements IGem
 					int i = (chunkX << 4) + ii + 1;
 					int j = (chunkZ << 4) + jj + 1;
 
-					if(gate.noise(i / 8D, j / 8D) > getGenChance() * GLOBAL_GEN_MULTIPLIER)
+					if(((gate.noise(i / 32D, j / 32D) +1d) / 2d) > getGenChance() * GLOBAL_GEN_MULTIPLIER)
 					{
 						continue;
 					}

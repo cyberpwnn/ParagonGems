@@ -1,20 +1,25 @@
 {
   "type": "minecraft:crafting_shaped",
+  "group": "tools",
   "pattern":
   [
-    "xxa",
-    "x x",
-    "xxx"
+    "nnn",
+    " i ",
+    " s "
   ],
   "key":
   {
+    "n":
+    {
+      "tag": "minecraft:iron_nugget"
+    },
     "i":
     {
-      "tag": "forge:gems/diamond"
+      "tag": "minecraft:iron_ingot"
     },
     "s":
     {
-      "item": "paragongems:chisel_iron"
+      "tag": "minecraft:stick"
     }
   },
   "result":

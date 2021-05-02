@@ -1,5 +1,7 @@
 package ninja.bytecode.paragongems.chisels;
 
+import ninja.bytecode.paragongems.gems.GemOpal;
+import ninja.bytecode.paragongems.gems.GemRuby;
 import ninja.bytecode.paragongems.util.Chisel;
 
 public class ChiselRuby extends Chisel
@@ -13,5 +15,6 @@ public class ChiselRuby extends Chisel
 		setDescription("This chisel is tipped with Ruby. Find more material per ore block.");
 		setEfficiencyMod(7);
 		setModification(true);
+		setTip(new GemRuby());
 	}
 }

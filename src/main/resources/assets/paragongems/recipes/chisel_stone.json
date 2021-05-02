@@ -1,0 +1,30 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "group": "tools",
+  "pattern":
+  [
+    "nnn",
+    " i ",
+    " s "
+  ],
+  "key":
+  {
+    "n":
+    {
+      "tag": "minecraft:stone_button"
+    },
+    "i":
+    {
+      "tag": "minecraft:stone"
+    },
+    "s":
+    {
+      "tag": "minecraft:stick"
+    }
+  },
+  "result":
+  {
+    "item": "paragongems:chisel_stone",
+    "count": 1
+  }
+}

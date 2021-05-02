@@ -20,8 +20,10 @@ import net.minecraft.util.SoundCategory;
 import net.minecraft.util.math.RayTraceResult;
 import net.minecraft.util.math.Vec3d;
 import net.minecraft.world.WorldServer;
+import ninja.bytecode.paragongems.chisels.ChiselIron;
 import ninja.bytecode.paragongems.common.ProxyCommon;
 import ninja.bytecode.paragongems.util.IChisel;
+import ninja.bytecode.paragongems.util.IGem;
 
 public class ItemChisel extends Item
 {
@@ -54,6 +56,35 @@ public class ItemChisel extends Item
 			IBlockState state = world.getBlockState(rt.getBlockPos());
 			Block hit = state.getBlock();
 			player.getCooldownTracker().setCooldown(this, 9 - chisel.getFortuneLevel() + chisel.getTickMod());
+
+			if(hit instanceof BlockGem && chisel instanceof ChiselIron)
+			{
+				if(!chisel.hasTip())
+				{
+					IGem gem = ((BlockGem) hit).getGem();
+					for(IChisel i : ProxyCommon.getChisels())
+					{
+						if(i.hasTip() && i.getTip().getID().equals(gem.getID()))
+						{
+							if(random.nextInt(4) == 1)
+							{
+								((EntityPlayerMP) entityLiving).getServerWorld().destroyBlock(rt.getBlockPos(), false);
+								ItemStack is = new ItemStack(gem.getGemItem(), 9-(random.nextInt(1)+1));
+								Vec3d vp = player.getPositionEyes(Minecraft.getMinecraft().getRenderPartialTicks());
+								Vec3d vb = new Vec3d(rt.getBlockPos().getX(), rt.getBlockPos().getY(), rt.getBlockPos().getZ());
+								Vec3d vs = vb.subtract(vp).normalize();
+								EntityItem item = new EntityItem(player.getEntityWorld(), rt.getBlockPos().getX() - vs.x, rt.getBlockPos().getY() - vs.y, rt.getBlockPos().getZ() - vs.z, is);
+								player.getEntityWorld().spawnEntity(item);
+							}
+
+							world.playSound(null, rt.getBlockPos().getX(), rt.getBlockPos().getY(), rt.getBlockPos().getZ(), chisel.isMetal() ? ProxyCommon.getTingSound() : ProxyCommon.getHitSound(), SoundCategory.BLOCKS, 1f, (random.nextFloat() / 4f) + 1.4f);
+							world.playSound(null, rt.getBlockPos().getX(), rt.getBlockPos().getY(), rt.getBlockPos().getZ(), ProxyCommon.getBreakSound(), SoundCategory.BLOCKS, 1f, (random.nextFloat() / 4f) + 1.4f);
+							world.playSound(null, rt.getBlockPos().getX(), rt.getBlockPos().getY(), rt.getBlockPos().getZ(), ProxyCommon.getGemSound(), SoundCategory.BLOCKS, 1f, (random.nextFloat() / 4f) + 1.2f);
+							player.setHeldItem(EnumHand.MAIN_HAND, new ItemStack(i.getChiselItem()));
+						}
+					}
+				}
+			}
 
 			if(hit instanceof BlockOre)
 			{

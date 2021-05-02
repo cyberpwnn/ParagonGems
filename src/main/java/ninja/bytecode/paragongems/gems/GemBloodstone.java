@@ -9,5 +9,8 @@ public class GemBloodstone extends Gem
 	{
 		super("bloodstone", "Bloodstone");
 		setModifier(new ModOrgan().using(this));
+		setOreHeightRange(62, 99);
+		setRainfallRequirements(0f, 0.1f);
+		setTemperatureRequirements(0.5f, 1.5f);
 	}
 }

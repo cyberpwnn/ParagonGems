@@ -8,6 +8,13 @@ public interface IChisel
 
 	public String getName();
 
+	public IGem getTip();
+
+	public default boolean hasTip()
+	{
+		return getTip() != null;
+	}
+
 	public void setFortuneLevel(int level);
 
 	public int getFortuneLevel();

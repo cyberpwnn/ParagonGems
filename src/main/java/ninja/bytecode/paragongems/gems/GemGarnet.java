@@ -9,5 +9,8 @@ public class GemGarnet extends Gem
 	{
 		super("garnet", "Garnet");
 		setModifier(new ModRegenerative().using(this));
+		setOreHeightRange(42, 72);
+		setRainfallRequirements(0f, 1f);
+		setTemperatureRequirements(-1f, 0.5f);
 	}
 }

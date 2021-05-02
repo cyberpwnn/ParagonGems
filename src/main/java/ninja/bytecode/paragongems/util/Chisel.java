@@ -13,6 +13,7 @@ public class Chisel implements IChisel
 	private boolean metal;
 	private int tickmod;
 	private int efficiencymod;
+	private IGem tip;
 
 	public Chisel(String id, String name)
 	{
@@ -24,6 +25,14 @@ public class Chisel implements IChisel
 		setTickMod(0);
 		setEfficiencyMod(0);
 		setModification(false);
+	}
+
+	public IGem getTip() {
+		return tip;
+	}
+
+	public void setTip(IGem tip) {
+		this.tip = tip;
 	}
 
 	public void setDescription(String description)

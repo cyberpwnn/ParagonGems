@@ -9,5 +9,8 @@ public class GemOnyx extends Gem
 	{
 		super("onyx", "Onyx");
 		setModifier(new ModDomination().using(this));
+		setOreHeightRange(3, 21);
+		setRainfallRequirements(0f, 1f);
+		setTemperatureRequirements(-1f, 0.5f);
 	}
 }

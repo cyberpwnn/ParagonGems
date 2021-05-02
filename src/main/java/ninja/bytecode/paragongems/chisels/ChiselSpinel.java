@@ -1,5 +1,7 @@
 package ninja.bytecode.paragongems.chisels;
 
+import ninja.bytecode.paragongems.gems.GemRuby;
+import ninja.bytecode.paragongems.gems.GemSpinel;
 import ninja.bytecode.paragongems.util.Chisel;
 
 public class ChiselSpinel extends Chisel
@@ -13,5 +15,6 @@ public class ChiselSpinel extends Chisel
 		setDescription("This chisel is tipped with Spinel. Get material out of ores quickly.");
 		setEfficiencyMod(-3);
 		setModification(true);
+		setTip(new GemSpinel());
 	}
 }
