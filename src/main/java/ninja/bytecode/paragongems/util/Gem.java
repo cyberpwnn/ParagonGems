@@ -61,7 +61,7 @@ public class Gem implements IGem
 		setUseRocks(true);
 		setOregenDimension(0);
 		setOreHeightRange(1, 254);
-		setGenChance(0.15);
+		setGenChance(0.005);
 		hash = UUID.nameUUIDFromBytes((getID() + "-o-" + getName()).getBytes()).getMostSignificantBits() + 10000 * Short.MAX_VALUE;
 		System.out.println(getName() + " Gem's Hash = " + hash);
 	}
