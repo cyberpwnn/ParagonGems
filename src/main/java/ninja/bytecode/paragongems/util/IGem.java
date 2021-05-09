@@ -24,8 +24,6 @@ public interface IGem
 	 */
 	public String getID();
 
-	public GemTinkerModifier getModifier();
-
 	/**
 	 * Get the single word name of this gem type such as "Sapphire"
 	 *
@@ -116,4 +114,6 @@ public interface IGem
 	public int getYLevel(World world, int chunkX, int chunkZ);
 
 	public void generate(Random random, int chunkX, int chunkZ, World world, IChunkGenerator chunkGenerator, IChunkProvider chunkProvider);
+
+    IChisel getChisel();
 }

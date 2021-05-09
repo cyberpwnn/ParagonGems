@@ -20,7 +20,6 @@ public class Gem implements IGem
 {
 	private static final double GLOBAL_GEN_MULTIPLIER = 1;
 	private final String id;
-	private GemTinkerModifier modifier;
 	private final String name;
 	private ItemGem gem;
 	private ItemGemRock gemRock;
@@ -45,11 +44,17 @@ public class Gem implements IGem
 	private boolean rocks;
 	private boolean resourceblock;
 	private long hash;
+	private int fortuneLevel;
+	private int efficiencyLevel;
+	private int tickLevel;
 
 	public Gem(String id, String name)
 	{
 		this.id = id;
 		this.name = name;
+		setFortuneLevel(1);
+		setTickLevel(0);
+		setEfficiencyLevel(0);
 		setTemperatureRequirements(-1f, 2f);
 		setRainfallRequirements(0f, 1f);
 		setXPDrop(3, 7);
@@ -66,6 +71,31 @@ public class Gem implements IGem
 		System.out.println(getName() + " Gem's Hash = " + hash);
 	}
 
+
+	public int getFortuneLevel() {
+		return fortuneLevel;
+	}
+
+	public void setFortuneLevel(int fortuneLevel) {
+		this.fortuneLevel = fortuneLevel;
+	}
+
+	public int getEfficiencyLevel() {
+		return efficiencyLevel;
+	}
+
+	public void setEfficiencyLevel(int efficiencyLevel) {
+		this.efficiencyLevel = efficiencyLevel;
+	}
+
+	public int getTickLevel() {
+		return tickLevel;
+	}
+
+	public void setTickLevel(int tickLevel) {
+		this.tickLevel = tickLevel;
+	}
+
 	public void setGenChance(double genChance)
 	{
 		this.genChance = genChance;
@@ -74,16 +104,6 @@ public class Gem implements IGem
 	public double getGenChance()
 	{
 		return genChance;
-	}
-
-	public void setModifier(GemTinkerModifier modifier)
-	{
-		this.modifier = modifier;
-	}
-
-	public GemTinkerModifier getModifier()
-	{
-		return modifier;
 	}
 
 	@Override
@@ -498,5 +518,18 @@ public class Gem implements IGem
 				}
 			}
 		}
+	}
+
+	@Override
+	public IChisel getChisel() {
+		Chisel c = new Chisel("chisel_" + getID(), getName() + " Chisel");
+		c.setFortuneLevel(getFortuneLevel());
+		c.setEfficiencyMod(getEfficiencyLevel());
+		c.setTickMod(getTickLevel());
+		c.setDescription("A Chisel tipped with " + getName());
+		c.setTip(this);
+		c.setMetal(true);
+		c.setModification(true);
+		return c;
 	}
 }

@@ -29,11 +29,6 @@ public class ItemGem extends Item
 	public void addInformation(ItemStack stack, @Nullable World worldIn, List<String> tooltip, ITooltipFlag flagIn) {
 		super.addInformation(stack, worldIn, tooltip, flagIn);
 
-		if(gem.getModifier() != null)
-		{
-			tooltip.add("Tool Modifier: " + gem.getModifier().getLocalizedName());
-		}
-
 		tooltip.add("Found between " + gem.getOreMinimumHeight() + " - " + gem.getOreMaximumHeight());
 		tooltip.add("Rainfall " + gem.getMinimumRainfall() + " - " + gem.getMaximumRainfall());
 		tooltip.add("Temperature " + gem.getMinimumTemperature() + " - " + gem.getMaximumTemperature());

@@ -41,9 +41,6 @@ import ninja.bytecode.paragongems.util.IProxy;
 import ninja.bytecode.paragongems.util.Utilities;
 import scala.reflect.internal.Trees;
 import scala.util.Random;
-import slimeknights.mantle.util.RecipeMatch;
-import slimeknights.tconstruct.library.TinkerRegistry;
-import slimeknights.tconstruct.tools.TinkerModifiers;
 
 @Mod.EventBusSubscriber(modid = ParagonGems.MODID)
 public class ProxyCommon extends BaseProxy implements IProxy
@@ -57,8 +54,8 @@ public class ProxyCommon extends BaseProxy implements IProxy
 	private static ParagonCreativeTab tab;
 
 
-
 	private static List<IGem> registerGems() {
+		System.out.println("Register Gems");
 		List<IGem> gem = new ArrayList<>();
 
 		gem.add(new GemAgate());
@@ -85,13 +82,16 @@ public class ProxyCommon extends BaseProxy implements IProxy
 	}
 
 	private static List<IChisel> registerChisels() {
+		System.out.println("Register Chisels");
 		List<IChisel> g = new ArrayList<>();
 
 		g.add(new ChiselIron());
-		g.add(new ChiselOpal());
-		g.add(new ChiselRuby());
-		g.add(new ChiselSpinel());
 		g.add(new ChiselStone());
+
+		for(IGem i : getGems())
+		{
+			g.add(i.getChisel());
+		}
 
 		return g;
 	}
@@ -101,6 +101,8 @@ public class ProxyCommon extends BaseProxy implements IProxy
 	{
 		List<Runnable> tabber = new ArrayList<Runnable>();
 		getLogger().info("Common Pre Init");
+
+
 		for(IChisel i : getChisels())
 		{
 			ItemChisel chisel = new ItemChisel(i);
@@ -144,21 +146,6 @@ public class ProxyCommon extends BaseProxy implements IProxy
 				tabber.add(() -> bg.setCreativeTab(tab));
 				i.setGemBlock(bg);
 				i.setGemBlockItem(ib);
-			}
-
-			if(i.getModifier() != null)
-			{
-				i("Register modifier " + i.getModifier().getIdentifier());
-				try
-				{
-					TinkerRegistry.registerModifier(i.getModifier());
-				}
-
-				catch(Throwable exf)
-				{
-
-				}
-				i.getModifier().addRecipeMatch(RecipeMatch.of(i.getModifier().gem.getGemItem(), i.getModifier().count));
 			}
 		}
 
