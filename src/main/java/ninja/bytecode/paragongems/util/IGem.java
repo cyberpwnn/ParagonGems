@@ -111,6 +111,12 @@ public interface IGem
 
 	public void setOreHeightRange(int min, int max);
 
+	public double getPropertySpeed();
+
+	public double getPropertyStrength();
+
+	public double getPropertyMagic();
+
 	public int getYLevel(World world, int chunkX, int chunkZ);
 
 	public void generate(Random random, int chunkX, int chunkZ, World world, IChunkGenerator chunkGenerator, IChunkProvider chunkProvider);

@@ -24,6 +24,9 @@ public class Gem implements IGem
 	private ItemGem gem;
 	private ItemGemRock gemRock;
 	private BlockGemOre ore;
+	private double strength;
+	private double speed;
+	private double magic;
 	private BlockGem block;
 	private Item itemBlockOre;
 	private Item itemBlock;
@@ -332,6 +335,21 @@ public class Gem implements IGem
 		return rocks;
 	}
 
+	public void setPropertySpeed(double speed)
+	{
+		this.speed = speed;
+	}
+
+	public void setPropertyMagic(double magic)
+	{
+		this.magic = magic;
+	}
+
+	public void setPropertyStrength(double strength)
+	{
+		this.strength = strength;
+	}
+
 	@Override
 	public void setUseRocks(boolean rb)
 	{
@@ -438,6 +456,21 @@ public class Gem implements IGem
 	{
 		this.maxHeight = max;
 		this.minHeight = min;
+	}
+
+	@Override
+	public double getPropertySpeed() {
+		return speed;
+	}
+
+	@Override
+	public double getPropertyStrength() {
+		return strength;
+	}
+
+	@Override
+	public double getPropertyMagic() {
+		return magic;
 	}
 
 	@Override
